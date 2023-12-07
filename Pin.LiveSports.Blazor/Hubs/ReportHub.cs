@@ -2,7 +2,7 @@
 
 namespace Pin.LiveSports.Blazor.Hubs
 {
-    public class ReportHub
+    public class ReportHub : Hub
     {
         public async Task Send(string name, string message)
         {
