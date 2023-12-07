@@ -2,7 +2,7 @@
 
 namespace Pin.LiveSports.Core.Entities.Reports
 {
-    public class SuddenDeath : Report
+    public class SuddenDeathReport : Report
     {
         public Player HomePlayer { get; set; }
         public Player AwayPlayer { get; set; }
