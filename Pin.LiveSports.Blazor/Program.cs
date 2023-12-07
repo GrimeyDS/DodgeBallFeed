@@ -30,7 +30,7 @@ namespace Pin.LiveSports.Blazor
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.MapHub<ReportHub>('/reportHub');
+            app.MapHub<ReportHub>("/reportHub");
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
 
