@@ -5,9 +5,9 @@ namespace Pin.LiveSports.Blazor.Hubs
 {
     public class ReportHub : Hub
     {
-        public async Task Send(Report report)
+        public async Task AddReport(string report)
         {
-            await this.Clients.Others.SendAsync("reportAdded", report);
+            await Clients.Others.SendAsync("reportAdded", report);
         }
     }
 }

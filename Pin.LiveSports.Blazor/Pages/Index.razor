@@ -1,10 +1,78 @@
 ﻿@page "/"
 
+@inject ITeamService teamService;
 
-<Toggle OnChange="ChangeUser"></Toggle>
+<div class="container">
+    <div class="row">
+        <div class="col" id="header">
+            <h1>Dodgeball</h1>
+        </div>
+            <Toggle OnChange="ChangeUser"></Toggle>
+    </div>
+    
+        @if (isReporter)
+        {
+            <Reportage Teams="teams" ReportItem="reportItem" OnSave="AddReport"></Reportage>
+        }
+    
+        else
+        {
+            <div class="row">
+                <GamesOverview Teams="teams" Reports="fullGameReports"></GamesOverview>
+            </div>
+        }
+    
+</div>
+
 
 @code {
     private bool isReporter = false;
+    private ReportClient reportClient;
+    private List<GeneralReport> reports = new List<GeneralReport>();
+    private List<FullGameReport> fullGameReports = new List<FullGameReport>();
+    private Team[] teams;
+    private GeneralReport reportItem;
+
+    protected async override Task OnInitializedAsync()
+    {
+        teams = teamService.GetTeams().ToArray();
+        reportClient = new ReportClient();
+        reportClient.Configure(OnRemoteReport);
+        await reportClient.StartAsync();
+    }
+
+    private async Task AddReport(GeneralReport report)
+    {
+        reports.Add(report);
+        await reportClient.AddItemAsync(report);
+    }
+
+    private void OnRemoteReport(string serializedItem)
+    {
+        var reportItem = new GeneralReport();
+
+        if (serializedItem.Contains("ReportType\":0"))
+        {
+            reportItem = JsonConvert.DeserializeObject<FullGameReport>(serializedItem);
+            fullGameReports.Add((FullGameReport)reportItem);
+        }
+        else
+        {
+            if (serializedItem.Contains("ReportType\":1"))
+                reportItem = JsonConvert.DeserializeObject<FoulReport>(serializedItem);
+            else if (serializedItem.Contains("ReportType\":4"))
+                reportItem = JsonConvert.DeserializeObject<TeamChangeReport>(serializedItem);
+            else if (serializedItem.Contains("ReportType\":3"))
+                reportItem = JsonConvert.DeserializeObject<SuddenDeathReport>(serializedItem);
+            else
+                reportItem = JsonConvert.DeserializeObject<GeneralReport>(serializedItem);
+
+            reports.Add(reportItem);
+        }
+
+        this.StateHasChanged();
+    }
+
 
     private void ChangeUser()
     {
