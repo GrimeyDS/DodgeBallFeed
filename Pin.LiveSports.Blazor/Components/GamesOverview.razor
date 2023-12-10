@@ -1,5 +1,26 @@
-﻿<h3>GamesOverview</h3>
-
+﻿
+<div class="col">
+    @foreach(FullGameReport report in reports)
+    {
+        <FullGame Teams="Teams" Report="report"></FullGame>
+    }
+</div>
 @code {
+    [Parameter]
+    public List<FullGameReport> Reports { get; set; }
 
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    private FullGameReport[] reports;
+
+    protected override void OnInitialized()
+    {
+        reports = Reports.ToArray();
+    }
+
+    protected override void OnParametersSet()
+    {
+        reports = Reports.ToArray();
+    }
 }
