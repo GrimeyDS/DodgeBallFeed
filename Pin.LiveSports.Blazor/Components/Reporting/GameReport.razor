@@ -1,0 +1,75 @@
+﻿
+
+<EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form" >
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label" for="date">Game date</label>
+            <InputDate Type="InputDateType.Date" id="date" class="form-control" @bind-Value="ReportItem.Game.GameDate"></InputDate>
+            <ValidationMessage For="@(() => ReportItem.Game.GameDate)" />
+        </div>
+        <div class="col-3">
+            <label class="col-form-label" for="time">Game time in minutes</label>
+            <InputDate Type="InputDateType.Time" class="form-control" @bind-Value="ReportItem.Game.GameTime"></InputDate>
+            <ValidationMessage For="@(() => ReportItem.Game.GameTime)" />
+        </div>
+        <div class="col-6">
+            <label class="col-form-label" for="location">Location</label>
+            <InputText id="time" class="form-control" @bind-Value="ReportItem.Game.Location"></InputText>
+            <ValidationMessage For="@(() => ReportItem.Game.Location)" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label" for="homeTeam">Home team</label>
+            <InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="ReportItem.Game.HomeTeamId">
+                @foreach (var team in Teams)
+                {
+                    <option value="@team.Id">@team.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => ReportItem.Game.HomeTeamId)" />
+        </div>
+
+        <div class="col-2">
+            <label class="col-form-label" for="homeScore">Home team score</label>
+            <InputNumber id="homeScore" class="form-control" @bind-Value="ReportItem.Game.HomeScore"></InputNumber>
+            <ValidationMessage For="@(() => ReportItem.Game.HomeScore)" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label" for="awayTeam">Away team</label>
+            <InputSelect class="form-select" id="awayTeam" TValue="Guid" @bind-Value="ReportItem.Game.AwayTeamId">
+                @foreach (var team in Teams)
+                {
+                    <option value="@team.Id">@team.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => ReportItem.Game.AwayTeamId)" />
+        </div>
+
+        <div class="col-2">
+            <label class="col-form-label" for="awayScore">Away team score</label>
+            <InputNumber id="awayScore" class="form-control" @bind-Value="ReportItem.Game.AwayScore"></InputNumber>
+            <ValidationMessage For="@(() => ReportItem.Game.AwayScore)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public EventCallback<GeneralReport> OnSave { get; set; }
+
+    [Parameter]
+    public FullGameReport ReportItem { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+}

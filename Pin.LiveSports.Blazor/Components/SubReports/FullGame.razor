@@ -1,0 +1,23 @@
+﻿
+<div id="gameContainer">
+    <p>@homeTeamName (@Report.Game.HomeScore) - (@Report.Game.AwayScore) @awayTeamName</p>
+     <p>@Report.Game.GameDate - @Report.Game.GameTime minutes</p>
+   <p>@Report.Game.Location</p>
+</div>
+
+@code {
+    [Parameter]
+    public FullGameReport Report { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    private string homeTeamName;
+    private string awayTeamName;
+
+    protected override void OnInitialized()
+    {
+        homeTeamName = Teams.FirstOrDefault(t => t.Id == Report.Game.HomeTeamId)?.Name;
+        awayTeamName = Teams.FirstOrDefault(t => t.Id == Report.Game.AwayTeamId)?.Name;
+    }
+}
