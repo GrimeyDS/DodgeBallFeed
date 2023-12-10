@@ -1,10 +1,16 @@
 ﻿
 using Pin.LiveSports.Core.Entities.Games;
+using Pin.LiveSports.Core.Enumerations;
 
 namespace Pin.LiveSports.Core.Entities.Reports
 {
-    public class FoulReport : Report
+    public class FoulReport : GeneralReport
     {
         public Player Player { get; set; }
+
+        public FoulReport()
+        {
+            ReportType = ReportType.FoulReport;
+        }
     }
 }
