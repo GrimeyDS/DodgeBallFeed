@@ -1,5 +1,6 @@
 using Pin.LiveSports.Blazor.Data;
 using Pin.LiveSports.Blazor.Hubs;
+using Pin.LiveSports.Core.Services;
 
 namespace Pin.LiveSports.Blazor
 {
@@ -14,7 +15,7 @@ namespace Pin.LiveSports.Blazor
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSignalR();
-
+            builder.Services.AddTransient<ITeamService, TeamService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
