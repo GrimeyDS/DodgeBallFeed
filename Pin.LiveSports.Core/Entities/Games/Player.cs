@@ -9,10 +9,5 @@ namespace Pin.LiveSports.Core.Entities.Games
         public string LastName { get; set; }
         public string Country { get; set; }
         public Role Role { get; set; }
-
-        public Player()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }

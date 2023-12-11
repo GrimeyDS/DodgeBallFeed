@@ -1,4 +1,5 @@
 ﻿using Pin.LiveSports.Core.Entities.Reports;
+using Pin.LiveSports.Core.Validators;
 using System.ComponentModel.DataAnnotations;
 
 namespace Pin.LiveSports.Core.Entities.Games
@@ -13,13 +14,15 @@ namespace Pin.LiveSports.Core.Entities.Games
         public DateTime GameTime { get; set; }
         [Required]
         public string Location { get; set; }
-        [Required]
+        [GuidValidator]
         public Guid HomeTeamId { get; set; }
-        [Required]
+        [GuidValidator]
         public Guid AwayTeamId { get; set; }
         [Required]
+        [Range(0, 100)]
         public int HomeScore { get; set; }
         [Required]
+        [Range(0, 100)]
         public int AwayScore { get; set; } 
 
         public List<GeneralReport> GeneralReports { get; set; }
