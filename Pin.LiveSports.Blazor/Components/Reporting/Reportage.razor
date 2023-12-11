@@ -31,7 +31,7 @@ else if (selectedReportType == "Feed")
             </div>
         </div>
     }
-    else if (selectedGameId == Guid.Empty)
+    else if (selectedGameId == Guid.Empty || Game is null)
     {
         <div class="row">
             <div class="col">
@@ -41,14 +41,15 @@ else if (selectedReportType == "Feed")
     }
     else
     {
+
         if (selectedSubReportType == "General")
         {
             <GeneralReportForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralReportForm>
         }
-@*         else if (selectedSubReportType == "Foul")
+        else if (selectedSubReportType == "Foul")
         {
-            <FoulReportForm Teams="Teams"  HomeTeamId="selectedGame.HomeTeamId" AwayTeamId="selectedGame.AwayTeamId" ReportItem="(FoulReport)ReportItem" OnSave="e => OnSave.InvokeAsync(ReportItem)"></FoulReportForm>
-        } *@
+            <FoulReportForm Teams="Teams" HomeTeamId="Game.HomeTeamId" AwayTeamId="Game.AwayTeamId" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
+        }
 @*          else if (selectedFeedType == "TeamChange")
         {
             ReportItem = new TeamChangeReport();
@@ -86,7 +87,10 @@ else if (selectedReportType == "Feed")
     {
         Game = new Game();
         Game.Id = Guid.NewGuid();
-        Game.Reports = new List<GeneralReport>();
+        Game.GeneralReports = new List<GeneralReport>();
+        Game.FoulReports = new List<FoulReport>();
+        Game.TeamChangeReports = new List<TeamChangeReport>();
+        Game.SuddenDeathReports = new List<SuddenDeathReport>();
     }
 
     private void ChangeReportType(string selectedItem)
@@ -123,7 +127,26 @@ else if (selectedReportType == "Feed")
         selectedSubReportType = "none";
 
         Game = Games.FirstOrDefault(g => g.Id == selectedGameId);
-        Game.Reports.Add(reportItem);
+
+        var reportTypeName = reportItem.GetType().Name;
+        switch  (reportTypeName)
+        {
+            case nameof(GeneralReport):
+                Game.GeneralReports.Add(reportItem);
+                break;
+            case nameof(FoulReport):
+                Game.FoulReports.Add((FoulReport)reportItem);
+                break;
+            case nameof(TeamChangeReport):
+                Game.TeamChangeReports.Add((TeamChangeReport)reportItem);
+                break;
+            case nameof(SuddenDeathReport):
+                Game.SuddenDeathReports.Add((SuddenDeathReport)reportItem);
+                break;
+            default:
+                break;
+        }
+
         OnSave.InvokeAsync(Game);
     }
 }

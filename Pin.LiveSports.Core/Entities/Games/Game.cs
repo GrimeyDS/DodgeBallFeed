@@ -22,6 +22,10 @@ namespace Pin.LiveSports.Core.Entities.Games
         [Required]
         public int AwayScore { get; set; } 
 
-        public List<GeneralReport> Reports { get; set; }
+        public List<GeneralReport> GeneralReports { get; set; }
+        public List<FoulReport> FoulReports { get; set; }
+        public List<SuddenDeathReport> SuddenDeathReports { get; set; }
+        public List<TeamChangeReport> TeamChangeReports { get; set; }
+
     }
 }

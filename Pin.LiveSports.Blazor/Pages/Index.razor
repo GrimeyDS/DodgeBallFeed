@@ -65,7 +65,10 @@
         else
         {
             var oldGame = games.Where(g => g.Id == game.Id).FirstOrDefault();
-            oldGame.Reports = game.Reports;
+            oldGame.GeneralReports = game.GeneralReports;
+            oldGame.FoulReports = game.FoulReports;
+            oldGame.TeamChangeReports = game.TeamChangeReports;
+            oldGame.SuddenDeathReports = game.SuddenDeathReports;
         }
              
         this.StateHasChanged();

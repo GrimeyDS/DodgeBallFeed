@@ -8,13 +8,13 @@
         <div class="row">
             <div class="col-3">
                 <label class="col-form-label" for="player">Foul player</label>
-                <InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="ReportItem.Player.Id">
+                <InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="ReportItem.PlayerId">
                     @foreach (var player in AllPlayers)
                     {
                         <option value="@player.Id">@player.FirstName @player.LastName</option>
                     }
                 </InputSelect>
-                <ValidationMessage For="@(() => ReportItem.Player.Id)" />
+                <ValidationMessage For="@(() => ReportItem.PlayerId)" />
             </div>
         </div>
 
@@ -45,6 +45,7 @@
 
     protected override void OnInitialized()
     {
+       
         HomePlayers = Teams.FirstOrDefault(t => t.Id == HomeTeamId).Players.ToArray();
         AwayPlayers = Teams.FirstOrDefault(t => t.Id == AwayTeamId).Players.ToArray();
         AllPlayers = [..HomePlayers, ..AwayPlayers];

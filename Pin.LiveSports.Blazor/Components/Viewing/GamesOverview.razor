@@ -3,9 +3,9 @@
         @if (currentGame is not null)
         {
             <div> add feed for game)</div>
-            @foreach (var report in currentGame.Reports)
+            @foreach (var report in currentGame.FoulReports)
             {
-                <div>@report.Title</div>
+                    <div>@((report as FoulReport).PlayerId.ToString())</div>
             }
         }
         else
