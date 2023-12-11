@@ -3,6 +3,10 @@
         @if (currentGame is not null)
         {
             <div> add feed for game)</div>
+            @foreach (var report in currentGame.Reports)
+            {
+                <div>@report.Title</div>
+            }
         }
         else
         {

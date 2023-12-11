@@ -28,7 +28,7 @@
     private ReportClient reportClient;
     private List<Game> games = new List<Game>();
     private Team[] teams;
-    private IGeneralReport reportItem;
+    private GeneralReport reportItem;
 
     private Game currentGame;
 
@@ -54,8 +54,10 @@
         await reportClient.AddItemAsync(game);
     }
 
-    private void OnRemoteReport(Game game)
+    private void OnRemoteReport(string json)
     {
+        Game game = JsonConvert.DeserializeObject<Game>(json);
+
         if (games.Where(g => g.Id == game.Id).Count() == 0)
         {
             games.Add(game);
@@ -63,7 +65,7 @@
         else
         {
             var oldGame = games.Where(g => g.Id == game.Id).FirstOrDefault();
-            oldGame = game;
+            oldGame.Reports = game.Reports;
         }
              
         this.StateHasChanged();
@@ -72,5 +74,10 @@
     private void ChangeUser()
     {
        isReporter = !isReporter;
+    }
+
+    private void ChangeCurrentGame(Game game)
+    {
+        currentGame = game;
     }
 }

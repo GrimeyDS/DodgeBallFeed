@@ -1,7 +1,8 @@
 ﻿
 <div class="row" id="selection">
     <div>
-        <select @onchange="e => SendSelectedItem(e)" class="form-select" aria-label="Default select example">
+        <select @bind="selectedItem" @onmouseup="e => SendSelectedItem()" class="form-select" aria-label="Default select example">
+            <option value="none" disabled selected>none</option>
             @foreach(var item in Data)
             {
                 <option value="@item">@item</option>
@@ -19,9 +20,13 @@
 
     private string selectedItem;
 
-    private void SendSelectedItem(ChangeEventArgs e)
+    private void SendSelectedItem()
     {
-        selectedItem = e.Value.ToString();
         OnSelect.InvokeAsync(selectedItem);
+    }
+
+    public void Refresh()
+    {
+        selectedItem = "none";
     }
 }

@@ -1,6 +1,6 @@
 ﻿
 
-<Select Data="reportTypes" OnSelect="ChangeReportType"></Select>
+<Select Data="reportTypes" OnSelect="ChangeReportType" @ref="_select"></Select>
 
 @if (selectedReportType == "Game")
 {
@@ -9,11 +9,12 @@
 }
 else if (selectedReportType == "Feed")
 {
-    <Select Data="subReportTypes" OnSelect="ChangeSubReportType"></Select>
+    <Select Data="subReportTypes" OnSelect="ChangeSubReportType" ></Select>
 
     <div class="row" id="selection">
         <div>
-            <select @bind="selectedGameId" class="form-select" aria-label="Default select example">
+            <select @onchange="e => changeCurrentGame(e)" class="form-select" aria-label="Default select example">
+                <option value="" disabled selected>Select a game</option>
                 @foreach (var game in Games)
                 {
                     <option value="@game.Id">@game.Name</option>
@@ -42,7 +43,7 @@ else if (selectedReportType == "Feed")
     {
         if (selectedSubReportType == "General")
         {
-            <GeneralReportForm ReportItem="(GeneralReport)reportItem" OnSave="SaveReportItem"></GeneralReportForm>
+            <GeneralReportForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralReportForm>
         }
 @*         else if (selectedSubReportType == "Foul")
         {
@@ -71,19 +72,21 @@ else if (selectedReportType == "Feed")
     [Parameter]
     public List<Game> Games { get; set; }
 
-    private string[] reportTypes = new string[] { "None", "Game", "Feed" };
-    private string[] subReportTypes = new string[] { "None", "General", "Foul", "TeamChange", "SuddenDeath" };
+    private string[] reportTypes = new string[] { "Game", "Feed" };
+    private string[] subReportTypes = new string[] { "General", "Foul", "TeamChange", "SuddenDeath" };
     private string selectedReportType;
     private string selectedSubReportType;
     private Guid selectedGameId;
 
-    private IGeneralReport reportItem;
+    private GeneralReport reportItem;
+
+    private Select _select;
 
     private void InitializeNewGame()
     {
         Game = new Game();
         Game.Id = Guid.NewGuid();
-        Game.GeneralReports = new List<IGeneralReport>();
+        Game.Reports = new List<GeneralReport>();
     }
 
     private void ChangeReportType(string selectedItem)
@@ -102,18 +105,25 @@ else if (selectedReportType == "Feed")
             "SuddenDeath" => new SuddenDeathReport(),
             _ => new(),
         };
-
-        ChangeGame();
     }
 
-    private void ChangeGame()
+    private void changeCurrentGame(ChangeEventArgs e)
     {
+        if (!string.IsNullOrEmpty(e.Value.ToString()))
+        {
+            selectedGameId = Guid.Parse(e.Value.ToString());
+            Game = Games.FirstOrDefault(g => g.Id == selectedGameId);
+        }
+    }
+
+    private void SaveReportItem(GeneralReport reportItem)
+    {
+        _select.Refresh();
+        selectedReportType = "none";
+        selectedSubReportType = "none";
+
         Game = Games.FirstOrDefault(g => g.Id == selectedGameId);
-    }
-
-    private void SaveReportItem(IGeneralReport reportItem)
-    {
-        Game.GeneralReports.Add(reportItem);
+        Game.Reports.Add(reportItem);
         OnSave.InvokeAsync(Game);
     }
 }
