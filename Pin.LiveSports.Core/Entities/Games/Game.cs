@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Pin.LiveSports.Core.Entities.Reports;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pin.LiveSports.Core.Entities.Games
 {
@@ -9,7 +10,7 @@ namespace Pin.LiveSports.Core.Entities.Games
         ErrorMessage = "Date must be between 01/01/2010 and now")]
         public DateTime GameDate { get; set; }
         [Required]
-        public TimeOnly GameTime { get; set; }
+        public DateTime GameTime { get; set; }
         [Required]
         public string Location { get; set; }
         [Required]
@@ -20,5 +21,7 @@ namespace Pin.LiveSports.Core.Entities.Games
         public int HomeScore { get; set; }
         [Required]
         public int AwayScore { get; set; } 
+
+        public List<IGeneralReport> GeneralReports { get; set; }
     }
 }

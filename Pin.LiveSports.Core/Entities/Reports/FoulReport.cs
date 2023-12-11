@@ -10,7 +10,7 @@ namespace Pin.LiveSports.Core.Entities.Reports
 
         public FoulReport()
         {
-            ReportType = ReportType.FoulReport;
+            Player = new Player();
         }
     }
 }

@@ -9,9 +9,5 @@ namespace Pin.LiveSports.Core.Entities.Reports
         public Player HomePlayer { get; set; }
         public Player AwayPlayer { get; set; }
 
-        public SuddenDeathReport()
-        {
-            ReportType = ReportType.SuddenDeathReport;
-        }
     }
 }
