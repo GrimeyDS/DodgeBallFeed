@@ -1,0 +1,63 @@
+﻿
+<div class="container">
+    <div class="card">
+        <div class="card_title">
+            <h1>Match Info</h1>
+            <p>@SingleGame.GameDate.ToShortDateString() - @SingleGame.GameTime.ToShortTimeString() m</p>
+        </div>
+        <div class="match_info">
+            <div class="team_name">
+                <div class="team1">
+                    <img src="@homeTeamLogo"
+                         alt="" />
+                    <h3>@homeTeamName</h3>
+                </div>
+                <div class="team2">
+                    <img src="@awayTeamLogo"
+                         alt="" />
+                    <h3>@awayTeamName</h3>
+                </div>
+            </div>
+
+            <div class="date_time">
+                <div>
+                    <h3>@SingleGame.HomeScore</h3>
+                </div>
+               <br/>
+                <div>
+                    <h3>@SingleGame.AwayScore</h3>
+                </div>
+            </div>
+        </div>
+        <div class="seeDetails">
+            <a href="#" @onclick="e => OnSelect.InvokeAsync(SingleGame)">
+                See Details
+                <span><i class="fa fa-caret-down" aria-hidden="true"></i> </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Game SingleGame { get; set; }
+
+    [Parameter]
+    public EventCallback<Game> OnSelect { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    private string homeTeamName;
+    private string awayTeamName;
+    private string awayTeamLogo;
+    private string homeTeamLogo;
+
+    protected override void OnInitialized()
+    {
+        homeTeamName = Teams.FirstOrDefault(t => t.Id == SingleGame.HomeTeamId)?.Name;
+        awayTeamName = Teams.FirstOrDefault(t => t.Id == SingleGame.AwayTeamId)?.Name;
+        homeTeamLogo = Teams.FirstOrDefault(t => t.Id == SingleGame.HomeTeamId)?.LogoUrl;
+        awayTeamLogo = Teams.FirstOrDefault(t => t.Id == SingleGame.AwayTeamId)?.LogoUrl;
+    }
+}

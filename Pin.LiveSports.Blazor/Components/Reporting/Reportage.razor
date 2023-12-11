@@ -1,0 +1,119 @@
+﻿
+
+<Select Data="reportTypes" OnSelect="ChangeReportType"></Select>
+
+@if (selectedReportType == "Game")
+{
+    InitializeNewGame();
+    <GameForm Teams="Teams" Game="Game" OnSave="e => OnSave.InvokeAsync(Game)"></GameForm>
+}
+else if (selectedReportType == "Feed")
+{
+    <Select Data="subReportTypes" OnSelect="ChangeSubReportType"></Select>
+
+    <div class="row" id="selection">
+        <div>
+            <select @bind="selectedGameId" class="form-select" aria-label="Default select example">
+                @foreach (var game in Games)
+                {
+                    <option value="@game.Id">@game.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    @if (selectedSubReportType == "None")
+    {
+        <div class="row">
+            <div class="col">
+                <h3>Please select a type of feed</h3>
+            </div>
+        </div>
+    }
+    else if (selectedGameId == Guid.Empty)
+    {
+        <div class="row">
+            <div class="col">
+                <h3>Please select a game</h3>
+            </div>
+        </div>
+    }
+    else
+    {
+        if (selectedSubReportType == "General")
+        {
+            <GeneralReportForm ReportItem="(GeneralReport)reportItem" OnSave="SaveReportItem"></GeneralReportForm>
+        }
+@*         else if (selectedSubReportType == "Foul")
+        {
+            <FoulReportForm Teams="Teams"  HomeTeamId="selectedGame.HomeTeamId" AwayTeamId="selectedGame.AwayTeamId" ReportItem="(FoulReport)ReportItem" OnSave="e => OnSave.InvokeAsync(ReportItem)"></FoulReportForm>
+        } *@
+@*          else if (selectedFeedType == "TeamChange")
+        {
+            ReportItem = new TeamChangeReport();
+        }
+        else if (selectedFeedType == "SuddenDeath")
+        {
+            ReportItem = new SuddenDeathReport();
+        } *@
+    }
+}
+@code {
+    [Parameter]
+    public EventCallback<Game> OnSave { get; set; }
+
+    [Parameter]
+    public Game Game { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    [Parameter]
+    public List<Game> Games { get; set; }
+
+    private string[] reportTypes = new string[] { "None", "Game", "Feed" };
+    private string[] subReportTypes = new string[] { "None", "General", "Foul", "TeamChange", "SuddenDeath" };
+    private string selectedReportType;
+    private string selectedSubReportType;
+    private Guid selectedGameId;
+
+    private IGeneralReport reportItem;
+
+    private void InitializeNewGame()
+    {
+        Game = new Game();
+        Game.Id = Guid.NewGuid();
+        Game.GeneralReports = new List<IGeneralReport>();
+    }
+
+    private void ChangeReportType(string selectedItem)
+    {
+        selectedReportType = selectedItem;
+    }
+
+    private void ChangeSubReportType(string selectedItem)
+    {
+        selectedSubReportType = selectedItem;
+        reportItem = selectedSubReportType switch
+        {
+            "General" => new GeneralReport(),
+            "Foul" => new FoulReport(),
+            "TeamChange" => new TeamChangeReport(),
+            "SuddenDeath" => new SuddenDeathReport(),
+            _ => new(),
+        };
+
+        ChangeGame();
+    }
+
+    private void ChangeGame()
+    {
+        Game = Games.FirstOrDefault(g => g.Id == selectedGameId);
+    }
+
+    private void SaveReportItem(IGeneralReport reportItem)
+    {
+        Game.GeneralReports.Add(reportItem);
+        OnSave.InvokeAsync(Game);
+    }
+}

@@ -1,0 +1,64 @@
+﻿
+
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+.container {
+    display: flex;
+    margin-top: 10px;
+    align-content: end;
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+
+.match_info,
+.card_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.team1,
+.team2 {
+    display: flex;
+    align-items: center;
+}
+
+    .team1 img,
+    .team2 img {
+        height: 50px;
+        width: 50px;
+        margin-right: 10px;
+    }
+
+.card h1 {
+    font-size: 20px;
+    margin-right: 50px;
+}
+
+.seeDetails {
+    display: grid;
+    place-items: center;
+}
+
+    .seeDetails a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .seeDetails span {
+        margin: 5px 10px;
+    }
+
+    h3{
+font-size: 20px;
+    }

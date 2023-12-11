@@ -12,14 +12,12 @@
     
         @if (isReporter)
         {
-            <Reportage Teams="teams" ReportItem="reportItem" OnSave="AddReport"></Reportage>
+            <Reportage Game="currentGame" Games="games" Teams="teams" OnSave="AddReport"></Reportage>
         }
     
         else
         {
-            <div class="row">
-                <GamesOverview Teams="teams" Reports="fullGameReports"></GamesOverview>
-            </div>
+            <GamesOverview Teams="teams" Games="games"></GamesOverview>
         }
     
 </div>
@@ -28,10 +26,11 @@
 @code {
     private bool isReporter = false;
     private ReportClient reportClient;
-    private List<GeneralReport> reports = new List<GeneralReport>();
-    private List<FullGameReport> fullGameReports = new List<FullGameReport>();
+    private List<Game> games = new List<Game>();
     private Team[] teams;
-    private GeneralReport reportItem;
+    private IGeneralReport reportItem;
+
+    private Game currentGame;
 
     protected async override Task OnInitializedAsync()
     {
@@ -41,38 +40,34 @@
         await reportClient.StartAsync();
     }
 
-    private async Task AddReport(GeneralReport report)
+    private async Task AddReport(Game game)
     {
-        reports.Add(report);
-        await reportClient.AddItemAsync(report);
-    }
-
-    private void OnRemoteReport(string serializedItem)
-    {
-        var reportItem = new GeneralReport();
-
-        if (serializedItem.Contains("ReportType\":0"))
+        if (games.Where(g => g.Id == game.Id).Count() == 0)
         {
-            reportItem = JsonConvert.DeserializeObject<FullGameReport>(serializedItem);
-            fullGameReports.Add((FullGameReport)reportItem);
+            games.Add(game);
         }
         else
         {
-            if (serializedItem.Contains("ReportType\":1"))
-                reportItem = JsonConvert.DeserializeObject<FoulReport>(serializedItem);
-            else if (serializedItem.Contains("ReportType\":4"))
-                reportItem = JsonConvert.DeserializeObject<TeamChangeReport>(serializedItem);
-            else if (serializedItem.Contains("ReportType\":3"))
-                reportItem = JsonConvert.DeserializeObject<SuddenDeathReport>(serializedItem);
-            else
-                reportItem = JsonConvert.DeserializeObject<GeneralReport>(serializedItem);
-
-            reports.Add(reportItem);
+            var oldGame = games.Where(g => g.Id == game.Id).FirstOrDefault();
+            oldGame = game;
         }
-
-        this.StateHasChanged();
+        await reportClient.AddItemAsync(game);
     }
 
+    private void OnRemoteReport(Game game)
+    {
+        if (games.Where(g => g.Id == game.Id).Count() == 0)
+        {
+            games.Add(game);
+        }
+        else
+        {
+            var oldGame = games.Where(g => g.Id == game.Id).FirstOrDefault();
+            oldGame = game;
+        }
+             
+        this.StateHasChanged();
+    }
 
     private void ChangeUser()
     {
