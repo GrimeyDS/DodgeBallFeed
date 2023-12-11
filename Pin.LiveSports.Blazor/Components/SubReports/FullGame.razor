@@ -1,8 +1,41 @@
 ﻿
-<div id="gameContainer">
-    <p>@homeTeamName (@Report.Game.HomeScore) - (@Report.Game.AwayScore) @awayTeamName</p>
-     <p>@Report.Game.GameDate - @Report.Game.GameTime minutes</p>
-   <p>@Report.Game.Location</p>
+<div class="container">
+    <div class="card">
+        <div class="card_title">
+            <h1>Match Info</h1>
+            <p>@Report.Game.GameDate.ToShortDateString() - @Report.Game.GameTime.ToShortTimeString() m</p>
+        </div>
+        <div class="match_info">
+            <div class="team_name">
+                <div class="team1">
+                    <img src="@homeTeamLogo"
+                         alt="" />
+                    <h3>@homeTeamName</h3>
+                </div>
+                <div class="team2">
+                    <img src="@awayTeamLogo"
+                         alt="" />
+                    <h3>@awayTeamName</h3>
+                </div>
+            </div>
+
+            <div class="date_time">
+                <div>
+                    <h3>@Report.Game.HomeScore</h3>
+                </div>
+               <br/>
+                <div>
+                    <h3>@Report.Game.AwayScore</h3>
+                </div>
+            </div>
+        </div>
+        <div class="seeDetails">
+            <a href="">
+                See Details
+                <span><i class="fa fa-caret-down" aria-hidden="true"></i> </span>
+            </a>
+        </div>
+    </div>
 </div>
 
 @code {
@@ -14,10 +47,14 @@
 
     private string homeTeamName;
     private string awayTeamName;
+    private string awayTeamLogo;
+    private string homeTeamLogo;
 
     protected override void OnInitialized()
     {
         homeTeamName = Teams.FirstOrDefault(t => t.Id == Report.Game.HomeTeamId)?.Name;
         awayTeamName = Teams.FirstOrDefault(t => t.Id == Report.Game.AwayTeamId)?.Name;
+        homeTeamLogo = Teams.FirstOrDefault(t => t.Id == Report.Game.HomeTeamId)?.LogoUrl;
+        awayTeamLogo = Teams.FirstOrDefault(t => t.Id == Report.Game.AwayTeamId)?.LogoUrl;
     }
 }
