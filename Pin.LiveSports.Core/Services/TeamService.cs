@@ -21,29 +21,33 @@ namespace Pin.LiveSports.Core.Services
                     {
                         new Player()
                         {
-                            FirstName = "John",
-                            LastName = "Doe",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                            FirstName = "Jaan",
+                            LastName = "De Bol",
                             Country = "Belgium",
                             Role = Role.Captain
                         },
                         new Player()
                         {
-                            FirstName = "Jane",
-                            LastName = "Doe",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            FirstName = "Mieke",
+                            LastName = "Vanlandschoot",
                             Country = "Belgium",
                             Role = Role.Throwers
                         },
                         new Player()
                         {
-                            FirstName = "Jack",
-                            LastName = "Doe",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                            FirstName = "Sarah",
+                            LastName = "De Zutter",
                             Country = "Belgium",
                             Role = Role.Corners
                         },
                         new Player()
                         {
-                            FirstName = "Jill",
-                            LastName = "Doe",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                            FirstName = "Bart",
+                            LastName = "Smoet",
                             Country = "Belgium",
                             Role = Role.Catchers
                         }
@@ -59,29 +63,33 @@ namespace Pin.LiveSports.Core.Services
                     {
                         new Player()
                         {
-                            FirstName = "John",
-                            LastName = "Kenobi",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                            FirstName = "Chloe",
+                            LastName = "Ola",
                             Country = "Canada",
                             Role = Role.Captain
                         },
                         new Player()
                         {
-                            FirstName = "Jane",
-                            LastName = "Kenobi",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                            FirstName = "Amelia",
+                            LastName = "Swan",
                             Country = "Canada",
                             Role = Role.Throwers
                         },
                         new Player()
                         {
-                            FirstName = "Jack",
-                            LastName = "Kenobi",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                            FirstName = "Clive",
+                            LastName = "Rosaria",
                             Country = "Canada",
                             Role = Role.Corners
                         },
                         new Player()
                         {
-                            FirstName = "Jill",
-                            LastName = "Kenobi",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                            FirstName = "Sid",
+                            LastName = "Cloud",
                             Country = "Canada",
                             Role = Role.Catchers
                         }
@@ -97,29 +105,33 @@ namespace Pin.LiveSports.Core.Services
                     {
                         new Player()
                         {
-                            FirstName = "John",
-                            LastName = "Skywalker",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                            FirstName = "Ishita",
+                            LastName = "Kashvi",
                             Country = "India",
                             Role = Role.Captain
                         },
                         new Player()
                         {
-                            FirstName = "Jane",
-                            LastName = "Skywalker",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                            FirstName = "Asmee",
+                            LastName = "Ishana",
                             Country = "India",
                             Role = Role.Throwers
                         },
                         new Player()
                         {
-                            FirstName = "Jack",
-                            LastName = "Skywalker",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                            FirstName = "Anaisha",
+                            LastName = "Ananya",
                             Country = "India",
                             Role = Role.Corners
                         },
                         new Player()
                         {
-                            FirstName = "Jill",
-                            LastName = "Skywalker",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000012"),
+                            FirstName = "Anala",
+                            LastName = "Adah",
                             Country = "India",
                             Role = Role.Catchers
                         }
@@ -135,29 +147,33 @@ namespace Pin.LiveSports.Core.Services
                     {
                         new Player()
                         {
-                            FirstName = "John",
-                            LastName = "Solo",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000013"),
+                            FirstName = "Mike",
+                            LastName = "Longshot",
                             Country = "USA",
                             Role = Role.Captain
                         },
                         new Player()
                         {
-                            FirstName = "Jane",
-                            LastName = "Solo",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000014"),
+                            FirstName = "Joshua",
+                            LastName = "Renfield",
                             Country = "USA",
                             Role = Role.Throwers
                         },
                         new Player()
                         {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000015"),
                             FirstName = "Jack",
-                            LastName = "Solo",
+                            LastName = "Baur",
                             Country = "USA",
                             Role = Role.Corners
                         },
                         new Player()
                         {
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000016"),
                             FirstName = "Jill",
-                            LastName = "Solo",
+                            LastName = "McAllister",
                             Country = "USA",
                             Role = Role.Catchers
                         }
@@ -173,28 +189,32 @@ namespace Pin.LiveSports.Core.Services
                     {
                         new Player()
                         {
-                            FirstName = "John",
-                            LastName = "Maximillian",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000017"),
+                            FirstName = "Mia",
+                            LastName = "Zeke",
                             Country = "Australia",
                             Role = Role.Captain
                         },
                         new Player()
                         {
-                            FirstName = "Jane",
-                            LastName = "Maximillian",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000018"),
+                            FirstName = "Henry",
+                            LastName = "Cavil",
                             Country = "Australia",
                             Role = Role.Throwers
                         },
                         new Player()
                         {
-                            FirstName = "Jack",
-                            LastName = "Maximillian",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000019"),
+                            FirstName = "Willliam",
+                            LastName = "Genova",
                             Country = "Australia",
                             Role = Role.Corners
                         },
                         new Player()
                         {
-                            FirstName = "Jill",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000020"),
+                            FirstName = "Isla",
                             LastName = "Maximillian",
                             Country = "Australia",
                             Role = Role.Catchers
@@ -211,29 +231,33 @@ namespace Pin.LiveSports.Core.Services
                     {
                         new Player()
                         {
-                            FirstName = "John",
-                            LastName = "Wong",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000021"),
+                            FirstName = "Ai",
+                            LastName = "Yang",
                             Country = "China",
                             Role = Role.Captain
                         },
                         new Player()
                         {
-                            FirstName = "Jane",
-                            LastName = "Wong",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000022"),
+                            FirstName = "Zhao",
+                            LastName = "Huang",
                             Country = "China",
                             Role = Role.Throwers
                         },
                         new Player()
                         {
-                            FirstName = "Jack",
-                            LastName = "Wong",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000023"),
+                            FirstName = "Zhang",
+                            LastName = "Li",
                             Country = "China",
                             Role = Role.Corners
                         },
                         new Player()
                         {
-                            FirstName = "Jill",
-                            LastName = "Wong",
+                            Id = Guid.Parse("00000000-0000-0000-0000-000000000024"),
+                            FirstName = "Liu",
+                            LastName = "Wan",
                             Country = "China",
                             Role = Role.Catchers
                         }
