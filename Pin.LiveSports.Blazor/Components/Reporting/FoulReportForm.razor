@@ -1,0 +1,52 @@
+﻿<div class="row">
+    <EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form" >
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <BaseGeneralForm ReportItem="ReportItem"></BaseGeneralForm>
+
+        <div class="row">
+            <div class="col-3">
+                <label class="col-form-label" for="player">Foul player</label>
+                <InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="ReportItem.Player.Id">
+                    @foreach (var player in AllPlayers)
+                    {
+                        <option value="@player.Id">@player.FirstName @player.LastName</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => ReportItem.Player.Id)" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+</div>
+
+
+@code {
+    [Parameter]
+    public EventCallback<GeneralReport> OnSave { get; set; }
+
+    [Parameter]
+    public FoulReport ReportItem { get; set; }
+
+    [Parameter]
+    public Guid HomeTeamId { get; set; }
+
+    [Parameter]
+    public Guid AwayTeamId { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    private Player[] HomePlayers { get; set; }
+    private Player[] AwayPlayers { get; set; }
+    private Player[] AllPlayers { get; set; }
+
+    protected override void OnInitialized()
+    {
+        HomePlayers = Teams.FirstOrDefault(t => t.Id == HomeTeamId).Players.ToArray();
+        AwayPlayers = Teams.FirstOrDefault(t => t.Id == AwayTeamId).Players.ToArray();
+        AllPlayers = [..HomePlayers, ..AwayPlayers];
+    }
+}

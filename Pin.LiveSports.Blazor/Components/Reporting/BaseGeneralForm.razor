@@ -1,0 +1,26 @@
+﻿<div class="row">
+    <div class="col-3">
+        <label class="col-form-label" for="date">Report Title</label>
+        <InputText id="title" class="form-control" @bind-Value="ReportItem.Title"></InputText>
+        <ValidationMessage For="@(() => ReportItem.Title)" />
+    </div>
+    <div class="col-3">
+        <label class="col-form-label" for="time">Game time</label>
+        <InputDate Type="InputDateType.Time" class="form-control" @bind-Value="ReportItem.Time"></InputDate>
+        <ValidationMessage For="@(() => ReportItem.Time)" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="col-form-label" for="date">Report Title</label>
+        <InputTextArea id="title" class="form-control" @bind-Value="ReportItem.ReportMessage"></InputTextArea>
+        <ValidationMessage For="@(() => ReportItem.ReportMessage)" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public GeneralReport ReportItem { get; set; }
+
+}

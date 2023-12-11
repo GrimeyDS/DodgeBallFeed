@@ -1,0 +1,27 @@
+﻿
+<div class="row" id="selection">
+    <div>
+        <select @onchange="e => SendSelectedItem(e)" class="form-select" aria-label="Default select example">
+            @foreach(var item in Data)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string[] Data { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnSelect { get; set; }
+
+    private string selectedItem;
+
+    private void SendSelectedItem(ChangeEventArgs e)
+    {
+        selectedItem = e.Value.ToString();
+        OnSelect.InvokeAsync(selectedItem);
+    }
+}
