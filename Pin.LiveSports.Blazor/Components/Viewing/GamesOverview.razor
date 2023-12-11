@@ -5,7 +5,8 @@
             <div> add feed for game)</div>
             @foreach (var report in currentGame.FoulReports)
             {
-                    <div>@((report as FoulReport).PlayerId.ToString())</div>
+                
+                    <div>@players.Where(p => p.Id == report.PlayerId).FirstOrDefault().FirstName @players.Where(p => p.Id == report.PlayerId).FirstOrDefault().LastName</div>
             }
         }
         else
@@ -32,9 +33,11 @@
     private Game[] games;
 
     private Game currentGame;
+    private Player[] players;
 
     protected override void OnInitialized()
     {
+        players = Teams.SelectMany(t => t.Players).ToArray();
         games = Games.ToArray();
     }
 
