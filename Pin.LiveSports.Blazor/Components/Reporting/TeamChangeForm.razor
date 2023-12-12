@@ -11,33 +11,9 @@
                 <InputCheckbox class="form-check-input" id="isOut" @bind-Value="ReportItem.IsOut"></InputCheckbox>
                 <ValidationMessage For="(() => ReportItem.IsOut)" />
             </div>
-            <div class="col-3">
-                <label class="col-form-label" for="player">Team</label>
-                <InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="ReportItem.TeamId">
-                    <option disabled selected>Select a Team</option>
-                    @foreach (var team in Teams)
-                    {
-                        <option value="@team.Id">@team.Name</option>
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(() => ReportItem.PlayerId)" />
-            </div>
-            <div class="col-3">
-                @if (ReportItem.TeamId != Guid.Empty)
-                {
-                    GetPlayers();
-                    <label class="col-form-label" for="player">Player</label>
-                    <InputSelect class="form-select" id="player" TValue="Guid" @bind-Value="ReportItem.PlayerId">
-                        <option disabled selected>Select a Player</option>
-                        @foreach (var player in players)
-                        {
-                            <option value="@player.Id">@player.FirstName @player.LastName</option>
-                        }
-                    </InputSelect>
-                    <ValidationMessage For="@(() => ReportItem.PlayerId)" />
-                }
-            </div>
 
+            <TeamSelect Teams="usableTeams" OnSelect="SetTeamId"></TeamSelect>
+            <PlayerSelect Teams="usableTeams" TeamId="ReportItem.TeamId"  OnSelect="SetPlayerId"></PlayerSelect>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
@@ -69,9 +45,13 @@
         usableTeams = Teams.Where(t => t.Id == HomeTeamId || t.Id == AwayTeamId).ToArray();
     }
 
-    private void GetPlayers()
+    private void SetTeamId(Guid id)
     {
-        var team = Teams.SingleOrDefault(t => t.Id == ReportItem.TeamId);
-        players = team.Players.ToArray();
+        ReportItem.TeamId = id;
+    }
+
+    private void SetPlayerId(Guid id)
+    {
+        ReportItem.PlayerId = id;
     }
 }
