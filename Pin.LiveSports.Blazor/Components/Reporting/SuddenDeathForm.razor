@@ -6,13 +6,17 @@
         <BaseGeneralForm ReportItem="ReportItem"></BaseGeneralForm>
 
         <div class="row">
-            <label class="col-form-label">Choose player from @HomeTeam.Name</label>
-            <PlayerSelect Team="HomeTeam" TeamId="HomeTeam.Id" OnSelect="SetHomePlayerId"></PlayerSelect>
+            <div class="col-3">
+                <label class="col-form-label">Choose player from @HomeTeam.Name</label>
+                <PlayerSelect Team="HomeTeam" TeamId="HomeTeam.Id" OnSelect="SetHomePlayerId"></PlayerSelect>
+            </div>
         </div>
 
         <div class="row">
-            <label class="col-form-label">Choose player from @AwayTeam.Name</label>
-            <PlayerSelect Team="AwayTeam" TeamId="AwayTeam.Id" OnSelect="SetAwayPlayerId"></PlayerSelect>
+            <div class="col-3">
+                <label class="col-form-label">Choose player from @AwayTeam.Name</label>
+                <PlayerSelect Team="AwayTeam" TeamId="AwayTeam.Id" OnSelect="SetAwayPlayerId"></PlayerSelect>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>

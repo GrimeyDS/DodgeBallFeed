@@ -31,7 +31,10 @@
         </div>
 
         <div class="row">
-            <TeamSelect OnSelect="SetHomeTeam" Teams="Teams"></TeamSelect>
+            <div class="col-3">
+                <label class="col-form-label">Home team</label>
+                <TeamSelect OnSelect="SetHomeTeam" Teams="Teams"></TeamSelect>
+            </div>
 
             <div class="col-2">
                 <label class="col-form-label" for="homeScore">Home team score</label>
@@ -41,7 +44,10 @@
         </div>
 
         <div class="row">
-            <TeamSelect OnSelect="SetAwayTeam" Teams="Teams"></TeamSelect>
+            <div class="col-3">
+                <label class="col-form-label">Away team</label>
+                <TeamSelect OnSelect="SetAwayTeam" Teams="Teams"></TeamSelect>
+            </div>
 
             <div class="col-2">
                 <label class="col-form-label" for="awayScore">Away team score</label>

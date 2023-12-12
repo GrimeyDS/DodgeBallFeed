@@ -6,7 +6,10 @@
         <BaseGeneralForm ReportItem="ReportItem"></BaseGeneralForm>
 
         <div class="row">
-            <TeamSelect Teams="Teams" OnSelect="SetScoredTeam"></TeamSelect>
+            <div class="col-3">
+                 <label class="col-form-label">Scored team</label>
+                 <TeamSelect Teams="Teams" OnSelect="SetScoredTeam"></TeamSelect>
+            </div>
         </div>
 
         <div class="row">

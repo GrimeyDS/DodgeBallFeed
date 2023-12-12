@@ -48,11 +48,11 @@ else if (selectedReportType == "Feed")
         {
             <FoulReportForm Teams="gameTeams" Game="Game" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
         }
-        else if (selectedSubReportType == "TeamChange")
+        else if (selectedSubReportType == "Team Change")
         {
             <TeamChangeForm Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
         }
-        else if (selectedSubReportType == "SuddenDeath")
+        else if (selectedSubReportType == "Sudden Death")
         {
             <SuddenDeathForm Teams="gameTeams" Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
         }
@@ -76,7 +76,7 @@ else if (selectedReportType == "Feed")
     public List<Game> Games { get; set; }
 
     private string[] reportTypes = new string[] { "Game", "Feed" };
-    private string[] subReportTypes = new string[] { "General", "Foul", "TeamChange", "SuddenDeath", "Score" };
+    private string[] subReportTypes = new string[] { "General", "Foul", "Team Change", "Sudden Death", "Score" };
     private string selectedReportType;
     private string selectedSubReportType;
     private Guid selectedGameId;

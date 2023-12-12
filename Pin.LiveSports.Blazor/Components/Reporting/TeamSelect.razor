@@ -1,12 +1,11 @@
-﻿<div class="col-3">
-    <InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="teamId" @onmouseup="e => OnSelect.InvokeAsync(teamId)">
-        <option disabled selected>Select a Team</option>
-        @foreach (var team in Teams)
-        {
-            <option value="@team.Id">@team.Name</option>
-        }
-    </InputSelect>
-</div>
+﻿
+<InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="teamId" @onmouseup="e => OnSelect.InvokeAsync(teamId)">
+    <option disabled selected>Select a Team</option>
+    @foreach (var team in Teams)
+    {
+        <option value="@team.Id">@team.Name</option>
+    }
+</InputSelect>
 
 @code {
     [Parameter]
