@@ -2,7 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-image: radial-gradient(circle, #538dcd, #4983c2, #4079b8, #366fad, #2b65a3);
+    background-color: #222831;
 }
 
 h1:focus {
