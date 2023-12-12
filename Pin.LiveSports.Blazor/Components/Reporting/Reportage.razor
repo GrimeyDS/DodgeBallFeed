@@ -91,11 +91,7 @@ else if (selectedReportType == "Feed")
     {
         Game = new Game();
         Game.Id = Guid.NewGuid();
-        Game.GeneralReports = new List<GeneralReport>();
-        Game.FoulReports = new List<FoulReport>();
-        Game.TeamChangeReports = new List<TeamChangeReport>();
-        Game.SuddenDeathReports = new List<SuddenDeathReport>();
-        Game.ScoreReports = new List<ScoreReport>();
+
     }
 
     private void ChangeReportType(string selectedItem)

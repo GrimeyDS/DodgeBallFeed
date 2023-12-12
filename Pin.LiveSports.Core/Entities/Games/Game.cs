@@ -23,7 +23,9 @@ namespace Pin.LiveSports.Core.Entities.Games
         public int HomeScore { get; set; }
         [Required]
         [Range(0, 100)]
-        public int AwayScore { get; set; } 
+        public int AwayScore { get; set; }
+
+        public int counter { get; set; }
 
         public List<GeneralReport> GeneralReports { get; set; }
         public List<FoulReport> FoulReports { get; set; }
@@ -31,5 +33,13 @@ namespace Pin.LiveSports.Core.Entities.Games
         public List<TeamChangeReport> TeamChangeReports { get; set; }
         public List<ScoreReport> ScoreReports { get; set; }
 
+        public Game()
+        {
+            GeneralReports = new List<GeneralReport>();
+            FoulReports = new List<FoulReport>();
+            SuddenDeathReports = new List<SuddenDeathReport>();
+            TeamChangeReports = new List<TeamChangeReport>();
+            ScoreReports = new List<ScoreReport>();
+        }
     }
 }
