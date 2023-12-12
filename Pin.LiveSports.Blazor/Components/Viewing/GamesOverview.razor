@@ -2,12 +2,27 @@
     <div class="col">
         @if (currentGame is not null)
         {
-            <div> add feed for game)</div>
             @foreach (var report in currentGame.FoulReports)
             {
-                
                     <div>@players.Where(p => p.Id == report.PlayerId).FirstOrDefault().FirstName @players.Where(p => p.Id == report.PlayerId).FirstOrDefault().LastName</div>
             }
+            @foreach (var report in currentGame.ScoreReports)
+            {
+                    <div>@Teams.Where(p => p.Id == report.ScoredTeam).FirstOrDefault().Name </div>
+            }
+            @foreach (var report in currentGame.SuddenDeathReports)
+            {
+                    <div>@players.Where(p => p.Id == report.AwayPlayerId).FirstOrDefault().FirstName @players.Where(p => p.Id == report.HomePlayerId).FirstOrDefault().LastName</div>
+            }
+            @foreach (var report in currentGame.TeamChangeReports)
+            {
+                    <div>@players.Where(p => p.Id == report.PlayerId).FirstOrDefault().FirstName @players.Where(p => p.Id == report.PlayerId).FirstOrDefault().LastName</div>
+            }
+            @foreach (var report in currentGame.GeneralReports)
+            {
+                    <div>@report.ReportMessage</div>
+            }
+
         }
         else
         {
@@ -23,6 +38,7 @@
         }
     </div>
 </div>
+
 @code {
     [Parameter]
     public List<Game> Games { get; set; }

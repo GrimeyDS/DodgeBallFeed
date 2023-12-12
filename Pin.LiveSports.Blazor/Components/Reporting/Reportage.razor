@@ -1,6 +1,4 @@
-﻿
-
-<Select Data="reportTypes" OnSelect="ChangeReportType" @ref="_select"></Select>
+﻿<Select Data="reportTypes" OnSelect="ChangeReportType" @ref="_selectReport"></Select>
 
 @if (selectedReportType == "Game")
 {
@@ -9,11 +7,11 @@
 }
 else if (selectedReportType == "Feed")
 {
-    <Select Data="subReportTypes" OnSelect="ChangeSubReportType" ></Select>
+    <Select Data="subReportTypes" OnSelect="ChangeSubReportType" @ref="_selectSubReport"></Select>
 
     <div class="row" id="selection">
         <div>
-            <select @onchange="e => changeCurrentGame(e)" class="form-select" aria-label="Default select example">
+            <select @onchange="e => ChangeCurrentGame(e)" class="form-select" aria-label="Default select example">
                 <option value="" disabled selected>Select a game</option>
                 @foreach (var game in Games)
                 {
@@ -23,7 +21,7 @@ else if (selectedReportType == "Feed")
         </div>
     </div>
 
-    @if (selectedSubReportType == "None")
+    @if (selectedSubReportType == "none")
     {
         <div class="row">
             <div class="col">
@@ -48,16 +46,20 @@ else if (selectedReportType == "Feed")
         }
         else if (selectedSubReportType == "Foul")
         {
-            <FoulReportForm Teams="Teams" HomeTeamId="Game.HomeTeamId" AwayTeamId="Game.AwayTeamId" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
+            <FoulReportForm Teams="gameTeams" Game="Game" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
         }
         else if (selectedSubReportType == "TeamChange")
         {
-            <TeamChangeForm Teams="Teams" HomeTeamId="Game.HomeTeamId" AwayTeamId="Game.AwayTeamId" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
+            <TeamChangeForm Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
         }
         else if (selectedSubReportType == "SuddenDeath")
         {
-            <SuddenDeathForm Teams="Teams" HomeTeamId="Game.HomeTeamId" AwayTeamId="Game.AwayTeamId" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
-        } 
+            <SuddenDeathForm Teams="gameTeams" Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
+        }
+        else if (selectedSubReportType == "Score")
+        {
+            <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
+        }
     }
 }
 @code {
@@ -74,14 +76,16 @@ else if (selectedReportType == "Feed")
     public List<Game> Games { get; set; }
 
     private string[] reportTypes = new string[] { "Game", "Feed" };
-    private string[] subReportTypes = new string[] { "General", "Foul", "TeamChange", "SuddenDeath" };
+    private string[] subReportTypes = new string[] { "General", "Foul", "TeamChange", "SuddenDeath", "Score" };
     private string selectedReportType;
     private string selectedSubReportType;
     private Guid selectedGameId;
+    private Team[] gameTeams;
 
     private GeneralReport reportItem;
 
-    private Select _select;
+    private Select _selectReport;
+    private Select _selectSubReport;
 
     private void InitializeNewGame()
     {
@@ -91,6 +95,7 @@ else if (selectedReportType == "Feed")
         Game.FoulReports = new List<FoulReport>();
         Game.TeamChangeReports = new List<TeamChangeReport>();
         Game.SuddenDeathReports = new List<SuddenDeathReport>();
+        Game.ScoreReports = new List<ScoreReport>();
     }
 
     private void ChangeReportType(string selectedItem)
@@ -107,22 +112,25 @@ else if (selectedReportType == "Feed")
             "Foul" => new FoulReport(),
             "TeamChange" => new TeamChangeReport(),
             "SuddenDeath" => new SuddenDeathReport(),
+            "Score" => new ScoreReport(),
             _ => new(),
         };
     }
 
-    private void changeCurrentGame(ChangeEventArgs e)
+    private void ChangeCurrentGame(ChangeEventArgs e)
     {
         if (!string.IsNullOrEmpty(e.Value.ToString()))
         {
             selectedGameId = Guid.Parse(e.Value.ToString());
             Game = Games.FirstOrDefault(g => g.Id == selectedGameId);
+            gameTeams = Teams.Where(t => t.Id == Game.HomeTeamId || t.Id == Game.AwayTeamId).ToArray();
         }
     }
 
     private void SaveReportItem(GeneralReport reportItem)
     {
-        _select.Refresh();
+        _selectReport.Refresh();
+        _selectSubReport.Refresh();
         selectedReportType = "none";
         selectedSubReportType = "none";
 
@@ -142,6 +150,9 @@ else if (selectedReportType == "Feed")
                 break;
             case nameof(SuddenDeathReport):
                 Game.SuddenDeathReports.Add((SuddenDeathReport)reportItem);
+                break;
+            case nameof(ScoreReport):
+                Game.ScoreReports.Add((ScoreReport)reportItem);
                 break;
             default:
                 break;

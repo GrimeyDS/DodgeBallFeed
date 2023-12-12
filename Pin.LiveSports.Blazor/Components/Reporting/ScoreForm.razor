@@ -1,0 +1,66 @@
+﻿<div class="row">
+    <EditForm Model="@ReportItem" OnValidSubmit="SetReportScore" class="form">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <BaseGeneralForm ReportItem="ReportItem"></BaseGeneralForm>
+
+        <div class="row">
+            <TeamSelect Teams="Teams" OnSelect="SetScoredTeam"></TeamSelect>
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+                <label class="col-form-label" for="homeScore">Score for @HomeTeam.Name</label>
+                <InputNumber id="homeScore" class="form-control" @bind-Value="Game.HomeScore"></InputNumber>
+                <ValidationMessage For="@(() => Game.HomeScore)" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+                <label class="col-form-label" for="homeScore">Score for @AwayTeam.Name</label>
+                <InputNumber id="awayScore" class="form-control" @bind-Value="Game.AwayScore"></InputNumber>
+                <ValidationMessage For="@(() => Game.AwayScore)" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+</div>
+
+
+@code {
+    [Parameter]
+    public EventCallback<GeneralReport> OnSave { get; set; }
+
+    [Parameter]
+    public ScoreReport ReportItem { get; set; }
+
+    [Parameter]
+    public Game Game { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    private Team HomeTeam;
+    private Team AwayTeam;
+
+    protected override void OnInitialized()
+    {
+        HomeTeam = Teams.FirstOrDefault(t => t.Id == Game.HomeTeamId);
+        AwayTeam = Teams.FirstOrDefault(t => t.Id == Game.AwayTeamId);
+    }
+
+    private void SetScoredTeam(Guid id)
+    {
+        ReportItem.ScoredTeam = id;
+    }
+
+    private void SetReportScore()
+    {
+        ReportItem.HomeScore = Game.HomeScore;
+        ReportItem.AwayScore = Game.AwayScore;
+        OnSave.InvokeAsync(ReportItem);
+    }
+}
