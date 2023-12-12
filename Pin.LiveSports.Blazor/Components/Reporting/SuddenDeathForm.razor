@@ -1,0 +1,57 @@
+﻿<div class="row">
+    <EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <BaseGeneralForm ReportItem="ReportItem"></BaseGeneralForm>
+
+        <div class="row">
+            <label class="col-form-label">Choose player from @HomeTeam.Name</label>
+            <PlayerSelect Team="HomeTeam" TeamId="HomeTeamId" OnSelect="SetHomePlayerId"></PlayerSelect>
+        </div>
+
+        <div class="row">
+            <label class="col-form-label">Choose player from @AwayTeam.Name</label>
+            <PlayerSelect Team="AwayTeam" TeamId="AwayTeamId" OnSelect="SetAwayPlayerId"></PlayerSelect>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<GeneralReport> OnSave { get; set; }
+
+    [Parameter]
+    public SuddenDeathReport ReportItem { get; set; }
+
+    [Parameter]
+    public Guid HomeTeamId { get; set; }
+
+    [Parameter]
+    public Guid AwayTeamId { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    private Team HomeTeam;
+    private Team AwayTeam;
+
+    protected override void OnInitialized()
+    {
+
+        HomeTeam = Teams.FirstOrDefault(t => t.Id == HomeTeamId);
+        AwayTeam = Teams.FirstOrDefault(t => t.Id == AwayTeamId);
+    }
+
+    private void SetHomePlayerId(Guid id)
+    {
+        ReportItem.HomePlayerId = id;
+    }
+
+    private void SetAwayPlayerId(Guid id)
+    {
+        ReportItem.AwayPlayerId = id;
+    }
+}

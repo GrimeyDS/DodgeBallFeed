@@ -1,13 +1,15 @@
-﻿using Pin.LiveSports.Core.Entities.Games;
-using Pin.LiveSports.Core.Enumerations;
+﻿
 
+using Pin.LiveSports.Core.Validators;
 
 namespace Pin.LiveSports.Core.Entities.Reports
 {
     public class SuddenDeathReport : GeneralReport
     {
-        public Player HomePlayer { get; set; }
-        public Player AwayPlayer { get; set; }
+        [GuidValidator]
+        public Guid HomePlayerId { get; set; }
+        [GuidValidator]
+        public Guid AwayPlayerId { get; set; }
 
     }
 }

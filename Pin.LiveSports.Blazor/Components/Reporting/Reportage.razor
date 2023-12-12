@@ -54,10 +54,10 @@ else if (selectedReportType == "Feed")
         {
             <TeamChangeForm Teams="Teams" HomeTeamId="Game.HomeTeamId" AwayTeamId="Game.AwayTeamId" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
         }
-@*         else if (selectedFeedType == "SuddenDeath")
+        else if (selectedSubReportType == "SuddenDeath")
         {
-            ReportItem = new SuddenDeathReport();
-        }  *@
+            <SuddenDeathForm Teams="Teams" HomeTeamId="Game.HomeTeamId" AwayTeamId="Game.AwayTeamId" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
+        } 
     }
 }
 @code {
