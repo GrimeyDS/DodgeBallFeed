@@ -7,12 +7,12 @@
 
         <div class="row">
             <label class="col-form-label">Choose player from @HomeTeam.Name</label>
-            <PlayerSelect Team="HomeTeam" TeamId="HomeTeamId" OnSelect="SetHomePlayerId"></PlayerSelect>
+            <PlayerSelect Team="HomeTeam" TeamId="HomeTeam.Id" OnSelect="SetHomePlayerId"></PlayerSelect>
         </div>
 
         <div class="row">
             <label class="col-form-label">Choose player from @AwayTeam.Name</label>
-            <PlayerSelect Team="AwayTeam" TeamId="AwayTeamId" OnSelect="SetAwayPlayerId"></PlayerSelect>
+            <PlayerSelect Team="AwayTeam" TeamId="AwayTeam.Id" OnSelect="SetAwayPlayerId"></PlayerSelect>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
@@ -27,10 +27,7 @@
     public SuddenDeathReport ReportItem { get; set; }
 
     [Parameter]
-    public Guid HomeTeamId { get; set; }
-
-    [Parameter]
-    public Guid AwayTeamId { get; set; }
+    public Game Game { get; set; }
 
     [Parameter]
     public Team[] Teams { get; set; }
@@ -40,9 +37,8 @@
 
     protected override void OnInitialized()
     {
-
-        HomeTeam = Teams.FirstOrDefault(t => t.Id == HomeTeamId);
-        AwayTeam = Teams.FirstOrDefault(t => t.Id == AwayTeamId);
+        HomeTeam = Teams.FirstOrDefault(t => t.Id == Game.HomeTeamId);
+        AwayTeam = Teams.FirstOrDefault(t => t.Id == Game.AwayTeamId);
     }
 
     private void SetHomePlayerId(Guid id)

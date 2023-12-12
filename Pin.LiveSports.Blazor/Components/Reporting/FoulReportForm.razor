@@ -31,23 +31,17 @@
     public FoulReport ReportItem { get; set; }
 
     [Parameter]
-    public Guid HomeTeamId { get; set; }
-
-    [Parameter]
-    public Guid AwayTeamId { get; set; }
+    public Game Game { get; set; }
 
     [Parameter]
     public Team[] Teams { get; set; }
 
-    private Player[] HomePlayers { get; set; }
-    private Player[] AwayPlayers { get; set; }
-    private Player[] AllPlayers { get; set; }
+    private Player[] AllPlayers;
 
     protected override void OnInitialized()
     {
-       
-        HomePlayers = Teams.FirstOrDefault(t => t.Id == HomeTeamId).Players.ToArray();
-        AwayPlayers = Teams.FirstOrDefault(t => t.Id == AwayTeamId).Players.ToArray();
+        Player[] HomePlayers = Teams.FirstOrDefault(t => t.Id == Game.HomeTeamId).Players.ToArray();
+        Player[] AwayPlayers = Teams.FirstOrDefault(t => t.Id == Game.AwayTeamId).Players.ToArray();
         AllPlayers = [..HomePlayers, ..AwayPlayers];
     }
 }

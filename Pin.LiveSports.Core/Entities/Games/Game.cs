@@ -29,6 +29,7 @@ namespace Pin.LiveSports.Core.Entities.Games
         public List<FoulReport> FoulReports { get; set; }
         public List<SuddenDeathReport> SuddenDeathReports { get; set; }
         public List<TeamChangeReport> TeamChangeReports { get; set; }
+        public List<ScoreReport> ScoreReports { get; set; }
 
     }
 }

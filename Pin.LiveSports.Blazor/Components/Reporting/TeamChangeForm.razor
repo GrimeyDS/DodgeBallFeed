@@ -12,8 +12,8 @@
                 <ValidationMessage For="(() => ReportItem.IsOut)" />
             </div>
 
-            <TeamSelect Teams="usableTeams" OnSelect="SetTeamId"></TeamSelect>
-            <PlayerSelect Teams="usableTeams" TeamId="ReportItem.TeamId"  OnSelect="SetPlayerId"></PlayerSelect>
+            <TeamSelect Teams="Teams" OnSelect="SetTeamId"></TeamSelect>
+            <PlayerSelect Teams="Teams" TeamId="ReportItem.TeamId"  OnSelect="SetPlayerId"></PlayerSelect>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
@@ -28,22 +28,7 @@
     public TeamChangeReport ReportItem { get; set; }
 
     [Parameter]
-    public Guid HomeTeamId { get; set; }
-
-    [Parameter]
-    public Guid AwayTeamId { get; set; }
-
-    [Parameter]
     public Team[] Teams { get; set; }
-
-    private Team[] usableTeams;
-    private Player[] players;
-
-
-    protected override void OnInitialized()
-    {
-        usableTeams = Teams.Where(t => t.Id == HomeTeamId || t.Id == AwayTeamId).ToArray();
-    }
 
     private void SetTeamId(Guid id)
     {
