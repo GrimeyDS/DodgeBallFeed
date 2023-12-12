@@ -1,18 +1,17 @@
 ﻿
-    <div class="col-3">
-        @if (TeamId != Guid.Empty)
-        {
-            GetPlayers();
-            <label class="col-form-label" for="player">Player</label>
-            <InputSelect class="form-select" id="player" TValue="Guid" @bind-Value="playerId" @onmouseup="e => OnSelect.InvokeAsync(playerId)">
-                <option disabled selected>Select a Player</option>
-                @foreach (var player in players)
-                {
-                    <option value="@player.Id">@player.FirstName @player.LastName</option>
-                }
-            </InputSelect>
-        }
-    </div>
+<div class="col-3">
+    @if (TeamId != Guid.Empty)
+    {
+        GetPlayers();
+        <InputSelect class="form-select" id="player" TValue="Guid" @bind-Value="playerId" @onmouseup="e => OnSelect.InvokeAsync(playerId)">
+            <option disabled selected>Select a Player</option>
+            @foreach (var player in players)
+            {
+                <option value="@player.Id">@player.FirstName @player.LastName</option>
+            }
+        </InputSelect>
+    }
+</div>
 
 @code {
     [Parameter]
