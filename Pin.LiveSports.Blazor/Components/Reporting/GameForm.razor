@@ -31,16 +31,7 @@
         </div>
 
         <div class="row">
-            <div class="col-3">
-                <label class="col-form-label" for="homeTeam">Home team</label>
-                <InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="Game.HomeTeamId">
-                    @foreach (var team in Teams)
-                    {
-                        <option value="@team.Id">@team.Name</option>
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(() => Game.HomeTeamId)" />
-            </div>
+            <TeamSelect OnSelect="SetHomeTeam" Teams="Teams"></TeamSelect>
 
             <div class="col-2">
                 <label class="col-form-label" for="homeScore">Home team score</label>
@@ -50,16 +41,7 @@
         </div>
 
         <div class="row">
-            <div class="col-3">
-                <label class="col-form-label" for="awayTeam">Away team</label>
-                <InputSelect class="form-select" id="awayTeam" TValue="Guid" @bind-Value="Game.AwayTeamId">
-                    @foreach (var team in Teams)
-                    {
-                        <option value="@team.Id">@team.Name</option>
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(() => Game.AwayTeamId)" />
-            </div>
+            <TeamSelect OnSelect="SetAwayTeam" Teams="Teams"></TeamSelect>
 
             <div class="col-2">
                 <label class="col-form-label" for="awayScore">Away team score</label>
@@ -81,5 +63,14 @@
     [Parameter]
     public Team[] Teams { get; set; }
 
+    private void SetHomeTeam(Guid id)
+    {
+        Game.HomeTeamId = id;
+    }
 
+    private void SetAwayTeam(Guid id)
+    {
+        Game.AwayTeamId = id;
+    }
 }
+s
