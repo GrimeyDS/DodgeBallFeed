@@ -31,12 +31,15 @@
     </div>
 
 
-    <div class="col-4">
-        @foreach (Game game in games)
-        {
-            <FullGame Teams="Teams" SingleGame="game" OnSelect="SelectGame"></FullGame>
-        }
-    </div>
+    @if (games is not null)
+    {
+        <div class="col-4" id="allGames">
+            @foreach (Game game in games)
+            {
+                <FullGame Teams="Teams" SingleGame="game" OnSelect="SelectGame"></FullGame>
+            }
+        </div>
+    }
 </div>
 
 @code {

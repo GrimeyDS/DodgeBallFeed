@@ -1,40 +1,34 @@
-﻿
-<div class="container">
-    <div class="card">
-        <div class="card_title">
-            <h1>Match Info</h1>
-            <p>@SingleGame.GameDate.ToShortDateString() - @SingleGame.GameTime.ToShortTimeString() m</p>
-        </div>
-        <div class="match_info">
-            <div class="team_name">
-                <div class="team1">
-                    <img src="@homeTeamLogo"
-                         alt="" />
+﻿<div class="game-next-match">
+    <div class="game-title">
+        <h3>@SingleGame.Name</h3>
+    </div>
+    <div class="game-body mb-3">
+        <div class="game-vs">
+            <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
+                <div class="team-1 text-center">
+                    <img src="@homeTeamLogo" alt="Image">
                     <h3>@homeTeamName</h3>
+                    <h4>@SingleGame.HomeScore</h4>
                 </div>
-                <div class="team2">
-                    <img src="@awayTeamLogo"
-                         alt="" />
+                <div>
+                    <span class="vs"><span>VS</span></span>
+                </div>
+                <div class="team-2 text-center">
+                    <img src="@awayTeamLogo" alt="Image">
                     <h3>@awayTeamName</h3>
+                    <h4>@SingleGame.HomeScore</h4>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="date_time">
-                <div>
-                    <h3>@SingleGame.HomeScore</h3>
-                </div>
-               <br/>
-                <div>
-                    <h3>@SingleGame.AwayScore</h3>
-                </div>
-            </div>
-        </div>
-        <div class="seeDetails">
-            <a href="#" @onclick="e => OnSelect.InvokeAsync(SingleGame)">
-                See Details
-                <span><i class="fa fa-caret-down" aria-hidden="true"></i> </span>
-            </a>
-        </div>
+    <div class="text-center game-vs-contents mb-4">
+        <h4>Dodgeball Cup League</h4>
+        <p class="mb-5">
+            <span class="d-block">@SingleGame.GameDate.ToShortDateString()</span>
+            <span class="d-block">Duration: @SingleGame.GameTime min</span>
+            <strong class="text-info">@SingleGame.Location</strong>
+        </p>
     </div>
 </div>
 
