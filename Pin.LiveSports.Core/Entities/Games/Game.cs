@@ -9,23 +9,28 @@ namespace Pin.LiveSports.Core.Entities.Games
         [Required]
         [Range(typeof(DateTime), "1/1/2010", "31/12/2050",
         ErrorMessage = "Date must be between 01/01/2010 and now")]
-        public DateTime GameDate { get; set; }
+        public DateTime GameDate { get; set; } = DateTime.Now;
+
         [Required]
-        public DateTime GameTime { get; set; }
+        [MinTimeOnlyValidator("00:01")]
+        public TimeOnly GameTime { get; set; }
+
         [Required]
         public string Location { get; set; }
+
         [GuidValidator]
         public Guid HomeTeamId { get; set; }
+
         [GuidValidator]
         public Guid AwayTeamId { get; set; }
+
         [Required]
         [Range(0, 100)]
         public int HomeScore { get; set; }
+
         [Required]
         [Range(0, 100)]
         public int AwayScore { get; set; }
-
-        public int counter { get; set; }
 
         public List<GeneralReport> GeneralReports { get; set; }
         public List<FoulReport> FoulReports { get; set; }
