@@ -3,7 +3,7 @@
 @if (selectedReportType == "Game")
 {
     InitializeNewGame();
-    <GameForm Teams="Teams" Game="Game" OnSave="e => OnSave.InvokeAsync(Game)"></GameForm>
+    <GameForm Teams="Teams" Game="Game" OnSave="SaveGame"></GameForm>
 }
 else if (selectedReportType == "Feed")
 {
@@ -39,26 +39,30 @@ else if (selectedReportType == "Feed")
     }
     else
     {
-
-        if (selectedSubReportType == "General")
+        switch (selectedSubReportType)
         {
-            <GeneralReportForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralReportForm>
-        }
-        else if (selectedSubReportType == "Foul")
-        {
-            <FoulReportForm Teams="gameTeams" Game="Game" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
-        }
-        else if (selectedSubReportType == "Team Change")
-        {
-            <TeamChangeForm Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
-        }
-        else if (selectedSubReportType == "Sudden Death")
-        {
-            <SuddenDeathForm Teams="gameTeams" Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
-        }
-        else if (selectedSubReportType == "Score")
-        {
-            <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
+            case "General":
+                reportItem = new GeneralReport();
+                <GeneralReportForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralReportForm>
+                break;
+            case "Foul":
+                reportItem = new FoulReport();
+                <FoulReportForm Teams="gameTeams" Game="Game" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
+                break;
+            case "Team Change":
+                reportItem = new TeamChangeReport();
+                <TeamChangeForm Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
+                break;
+            case "Sudden Death":
+                reportItem = new SuddenDeathReport();
+                <SuddenDeathForm Teams="gameTeams" Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
+                break;
+            case "Score":
+                reportItem = new ScoreReport();
+                <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
+                break;
+            default:
+                break;
         }
     }
 }
@@ -102,15 +106,6 @@ else if (selectedReportType == "Feed")
     private void ChangeSubReportType(string selectedItem)
     {
         selectedSubReportType = selectedItem;
-        reportItem = selectedSubReportType switch
-        {
-            "General" => new GeneralReport(),
-            "Foul" => new FoulReport(),
-            "TeamChange" => new TeamChangeReport(),
-            "SuddenDeath" => new SuddenDeathReport(),
-            "Score" => new ScoreReport(),
-            _ => new(),
-        };
     }
 
     private void ChangeCurrentGame(ChangeEventArgs e)
@@ -125,11 +120,7 @@ else if (selectedReportType == "Feed")
 
     private void SaveReportItem(GeneralReport reportItem)
     {
-        _selectReport.Refresh();
-        _selectSubReport.Refresh();
-        selectedReportType = "none";
-        selectedSubReportType = "none";
-
+        refresh();
         Game = Games.FirstOrDefault(g => g.Id == selectedGameId);
 
         var reportTypeName = reportItem.GetType().Name;
@@ -155,5 +146,20 @@ else if (selectedReportType == "Feed")
         }
 
         OnSave.InvokeAsync(Game);
+    }
+
+    private void SaveGame(Game game)
+    {
+        refresh();
+        OnSave.InvokeAsync(game);
+    }
+
+    private void refresh()
+    {
+        _selectReport.Refresh();
+        if (_selectSubReport != null)
+            _selectSubReport.Refresh();
+        selectedReportType = "none";
+        selectedSubReportType = "none";
     }
 }
