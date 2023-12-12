@@ -50,14 +50,14 @@ else if (selectedReportType == "Feed")
         {
             <FoulReportForm Teams="Teams" HomeTeamId="Game.HomeTeamId" AwayTeamId="Game.AwayTeamId" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
         }
-@*          else if (selectedFeedType == "TeamChange")
+        else if (selectedSubReportType == "TeamChange")
         {
-            ReportItem = new TeamChangeReport();
+            <TeamChangeForm Teams="Teams" HomeTeamId="Game.HomeTeamId" AwayTeamId="Game.AwayTeamId" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
         }
-        else if (selectedFeedType == "SuddenDeath")
+@*         else if (selectedFeedType == "SuddenDeath")
         {
             ReportItem = new SuddenDeathReport();
-        } *@
+        }  *@
     }
 }
 @code {
