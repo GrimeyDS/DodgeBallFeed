@@ -1,0 +1,45 @@
+﻿
+    <div class="col-3">
+        @if (TeamId != Guid.Empty)
+        {
+            GetPlayers();
+            <label class="col-form-label" for="player">Player</label>
+            <InputSelect class="form-select" id="player" TValue="Guid" @bind-Value="playerId" @onmouseup="e => OnSelect.InvokeAsync(playerId)">
+                <option disabled selected>Select a Player</option>
+                @foreach (var player in players)
+                {
+                    <option value="@player.Id">@player.FirstName @player.LastName</option>
+                }
+            </InputSelect>
+        }
+    </div>
+
+@code {
+    [Parameter]
+    public EventCallback<Guid> OnSelect { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    [Parameter]
+    public Team Team { get; set; }
+
+    [Parameter]
+    public Guid TeamId { get; set; }
+
+    private Player[] players;
+
+    public Guid playerId;
+
+    protected override void OnInitialized()
+    {
+        if (Team is not null)
+            Teams = new Team[] { Team };
+    }
+
+    private void GetPlayers()
+    {
+        var team = Teams.SingleOrDefault(t => t.Id == TeamId);
+        players = team.Players.ToArray();
+    }
+}

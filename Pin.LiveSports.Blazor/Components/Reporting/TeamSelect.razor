@@ -1,0 +1,20 @@
+﻿<div class="col-3">
+    <label class="col-form-label" for="player">Team</label>
+    <InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="teamId" @onmouseup="e => OnSelect.InvokeAsync(teamId)">
+        <option disabled selected>Select a Team</option>
+        @foreach (var team in Teams)
+        {
+            <option value="@team.Id">@team.Name</option>
+        }
+    </InputSelect>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<Guid> OnSelect { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    private Guid teamId;
+}
