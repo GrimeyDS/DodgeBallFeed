@@ -57,7 +57,7 @@
     private void OnRemoteReport(string json)
     {
         Game game = JsonConvert.DeserializeObject<Game>(json);
-
+        
         if (games.Where(g => g.Id == game.Id).Count() == 0)
         {
             games.Add(game);
@@ -65,13 +65,15 @@
         else
         {
             var oldGame = games.Where(g => g.Id == game.Id).FirstOrDefault();
-            
+
+            // oldGame = game does not work due to reference
+            oldGame.TeamChangeReports = game.TeamChangeReports;
             oldGame.GeneralReports = game.GeneralReports;
             oldGame.FoulReports = game.FoulReports;
-            oldGame.TeamChangeReports = game.TeamChangeReports;
             oldGame.SuddenDeathReports = game.SuddenDeathReports;
             oldGame.ScoreReports = game.ScoreReports;
-            oldGame = game;
+            oldGame.HomeScore = game.HomeScore;
+            oldGame.AwayScore = game.AwayScore;
         }
              
         this.StateHasChanged();
