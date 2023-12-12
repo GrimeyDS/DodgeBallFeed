@@ -8,3 +8,9 @@
     margin-right: 5px;
     color: White;
 }
+
+#banner {
+    margin-top: 5px;
+    width: 100%;
+    max-height: 350px;
+}

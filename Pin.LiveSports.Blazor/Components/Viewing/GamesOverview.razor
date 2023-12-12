@@ -31,7 +31,7 @@
     </div>
 
 
-    @if (games is not null)
+    @if (games.Length > 0)
     {
         <div class="col-4" id="allGames">
             @foreach (Game game in games)
@@ -40,6 +40,7 @@
             }
         </div>
     }
+
 </div>
 
 @code {
