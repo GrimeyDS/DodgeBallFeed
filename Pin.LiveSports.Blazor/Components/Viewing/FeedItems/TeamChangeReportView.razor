@@ -1,0 +1,31 @@
+﻿<li class="event" data-date="@ReportItem.Time">
+    <h3>@ReportItem.Title</h3>
+    <div>
+        @ReportItem.ReportMessage
+        <div id="playerChangeContainer">
+            <img id="arrow" src="@url" alt="player-change"/>@player.FirstName @player.LastName - @team.Name
+        </div>
+    </div>
+</li>
+@code {
+    [Parameter]
+    public TeamChangeReport ReportItem { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    private Player player;
+    private Team team;
+    private string url;
+
+    protected override void OnParametersSet()
+    {
+        team = Teams.Where(t => t.Id == ReportItem.TeamId).FirstOrDefault();
+        player = team.Players.Where(p => p.Id == ReportItem.PlayerId).FirstOrDefault();
+
+        if (ReportItem.IsOut)
+            url = "../images/redarrow.png";
+        else
+            url = "../images/greenarrow.png";
+    }
+}

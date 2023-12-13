@@ -9,6 +9,12 @@
                 case nameof(GeneralReport):
                    <GeneralReportView ReportItem="report"></GeneralReportView>
                     break;
+                case nameof(TeamChangeReport):
+                    <TeamChangeReportView Teams="Teams" ReportItem="(TeamChangeReport)report"></TeamChangeReportView>
+                    break;
+                case nameof(FoulReport):
+                    <FoulReportView Teams="Teams" ReportItem="(FoulReport)report"></FoulReportView>
+                    break;
                 default:
                     break;
             }

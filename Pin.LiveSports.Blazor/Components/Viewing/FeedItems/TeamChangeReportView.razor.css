@@ -1,0 +1,19 @@
+﻿#arrow {
+    width: 60px;
+    padding-right: 10px;
+}
+
+#playerChangeContainer {
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: start;
+    padding-left: 10%;
+    background-color: #222831;
+    border-radius: 5px;
+    width: 85%;
+    height: 70px;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+
