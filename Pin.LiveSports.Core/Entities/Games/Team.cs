@@ -2,12 +2,7 @@
 {
     public class Team : BaseEntity
     {
-        public ICollection<Player> Players { get; set; }
+        public ICollection<Player> Players { get; set; } = new List<Player>();
         public string LogoUrl { get; set; }
-
-        public Team()
-        {
-            Players = new List<Player>();
-        }
     }
 }
