@@ -19,7 +19,7 @@
                 <ValidationMessage For="@(() => Game.GameDate)" />
             </div>
             <div class="col-3">
-                <label class="col-form-label" for="time">Game time in minutes</label>
+                <label class="col-form-label" for="time">Game time</label>
                 <InputDate Type="InputDateType.Time" class="form-control" @bind-Value="Game.GameTime"></InputDate>
                 <ValidationMessage For="@(() => Game.GameTime)" />
             </div>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="col-2">
-                <label class="col-form-label" for="homeScore">Home team score</label>
+                <label class="col-form-label" for="homeScore">Score</label>
                 <InputNumber id="homeScore" class="form-control" @bind-Value="Game.HomeScore"></InputNumber>
                 <ValidationMessage For="@(() => Game.HomeScore)" />
             </div>
@@ -50,7 +50,7 @@
             </div>
 
             <div class="col-2">
-                <label class="col-form-label" for="awayScore">Away team score</label>
+                <label class="col-form-label" for="awayScore">Score</label>
                 <InputNumber id="awayScore" class="form-control" @bind-Value="Game.AwayScore"></InputNumber>
                 <ValidationMessage For="@(() => Game.AwayScore)" />
             </div>

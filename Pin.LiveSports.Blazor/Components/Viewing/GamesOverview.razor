@@ -2,34 +2,13 @@
     <div class="col">
         @if (currentGame is not null)
         {
-            @foreach (var report in currentGame.FoulReports)
-            {
-                    <div>@players.Where(p => p.Id == report.PlayerId).FirstOrDefault().FirstName @players.Where(p => p.Id == report.PlayerId).FirstOrDefault().LastName</div>
-            }
-            @foreach (var report in currentGame.ScoreReports)
-            {
-                    <div>@Teams.Where(p => p.Id == report.ScoredTeam).FirstOrDefault().Name </div>
-            }
-            @foreach (var report in currentGame.SuddenDeathReports)
-            {
-                    <div>@players.Where(p => p.Id == report.AwayPlayerId).FirstOrDefault().FirstName @players.Where(p => p.Id == report.HomePlayerId).FirstOrDefault().LastName</div>
-            }
-            @foreach (var report in currentGame.TeamChangeReports)
-            {
-                    <div>@players.Where(p => p.Id == report.PlayerId).FirstOrDefault().FirstName @players.Where(p => p.Id == report.PlayerId).FirstOrDefault().LastName</div>
-            }
-            @foreach (var report in currentGame.GeneralReports)
-            {
-                    <div>@report.ReportMessage</div>
-            }
-
+            <GameFeed Teams="Teams" Game="currentGame"></GameFeed>
         }
         else
         {
-            <div> select game to see feed</div>
+            <news></news>
         }
     </div>
-
 
     @if (games.Length > 0)
     {
@@ -54,12 +33,6 @@
 
     private Game currentGame;
     private Player[] players;
-
-    protected override void OnInitialized()
-    {
-        players = Teams.SelectMany(t => t.Players).ToArray();
-        games = Games.ToArray();
-    }
 
     protected override void OnParametersSet()
     {

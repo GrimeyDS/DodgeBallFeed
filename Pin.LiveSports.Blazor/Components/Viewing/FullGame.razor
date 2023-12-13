@@ -1,4 +1,4 @@
-﻿<div class="game-next-match">
+﻿<div class="game-next-match" @onclick="e => OnSelect.InvokeAsync(SingleGame)">
     <div class="game-title">
         <h3>@SingleGame.Name</h3>
     </div>
