@@ -1,8 +1,9 @@
-﻿
+﻿<li class="event" data-date="@ReportItem.Time">
+    <h3>@ReportItem.Title</h3>
+    <div>@ReportItem.ReportMessage</div>
+</li>
 
 @code {
     [Parameter]
     public GeneralReport ReportItem { get; set; }
-
 }
-s

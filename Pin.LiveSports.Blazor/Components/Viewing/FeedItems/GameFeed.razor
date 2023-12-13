@@ -1,21 +1,19 @@
-﻿<div id="FeedContainer">
-
+﻿<div id="feedContainer">
     
-
-    @foreach (var report in reports)
-    {
-        var typeName = report.GetType().Name;
-        switch (typeName)
+    <ul class="timeline">
+        @foreach (var report in reports)
         {
-            case nameof(GeneralReport):
-            <p class="text-primary">het werkt</p>
-               @*  <GeneralReportView Report="report"></GeneralReportView> *@
-                
-                break;
-            default:
-                break;
+            var typeName = report.GetType().Name;
+            switch (typeName)
+            {
+                case nameof(GeneralReport):
+                   <GeneralReportView ReportItem="report"></GeneralReportView>
+                    break;
+                default:
+                    break;
+            }
         }
-    }
+    </ul>
 
 </div>
 
@@ -31,7 +29,7 @@
     protected override void OnParametersSet()
     {
         reports = [.. Game.GeneralReports, .. Game.TeamChangeReports, .. Game.SuddenDeathReports, .. Game.ScoreReports, .. Game.FoulReports];
-        reports.OrderBy(r => r.Time);
+        reports = reports.OrderByDescending(x => x.Time).ToArray();
     }
 
 }
