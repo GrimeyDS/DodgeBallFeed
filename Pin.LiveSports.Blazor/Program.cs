@@ -1,4 +1,3 @@
-using Pin.LiveSports.Blazor.Data;
 using Pin.LiveSports.Blazor.Hubs;
 using Pin.LiveSports.Core.Services;
 
@@ -13,7 +12,6 @@ namespace Pin.LiveSports.Blazor
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-            builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSignalR();
             builder.Services.AddTransient<ITeamService, TeamService>();
             var app = builder.Build();
