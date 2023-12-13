@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Pin.LiveSports.Core.Entities.Reports
 {
-    public class GeneralReport
+    public class GeneralReport(TimeOnly currentGameTime) : IValidatableObject
     {
         public Guid Id { get; set; }
         [Required]
@@ -13,9 +13,15 @@ namespace Pin.LiveSports.Core.Entities.Reports
 
         [Required]
         [MinTimeOnlyValidator("00:01")]
-        public TimeOnly Time { get; set; }
+        public TimeOnly Time { get; set; } = currentGameTime;
 
         [Required]
         public string ReportMessage { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Time <= currentGameTime)
+                yield return new ValidationResult("Time cannot be less than the current game time.");
+        }
     }
 }

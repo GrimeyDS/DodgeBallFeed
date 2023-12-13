@@ -42,23 +42,23 @@ else if (selectedReportType == "Feed")
         switch (selectedSubReportType)
         {
             case "General":
-                reportItem = new GeneralReport();
+                reportItem = new GeneralReport(Game.GameTime);
                 <GeneralReportForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralReportForm>
                 break;
             case "Foul":
-                reportItem = new FoulReport();
+                reportItem = new FoulReport(Game.GameTime);
                 <FoulReportForm Teams="gameTeams" Game="Game" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
                 break;
             case "Team Change":
-                reportItem = new TeamChangeReport();
+                reportItem = new TeamChangeReport(Game.GameTime);
                 <TeamChangeForm Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
                 break;
             case "Sudden Death":
-                reportItem = new SuddenDeathReport();
+                reportItem = new SuddenDeathReport(Game.GameTime);
                 <SuddenDeathForm Teams="gameTeams" Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
                 break;
             case "Score":
-                reportItem = new ScoreReport();
+                reportItem = new ScoreReport(Game.GameTime);
                 <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
                 break;
             default:
@@ -95,7 +95,6 @@ else if (selectedReportType == "Feed")
     {
         Game = new Game();
         Game.Id = Guid.NewGuid();
-
     }
 
     private void ChangeReportType(string selectedItem)
@@ -122,6 +121,7 @@ else if (selectedReportType == "Feed")
     {
         refresh();
         Game = Games.FirstOrDefault(g => g.Id == selectedGameId);
+        Game.GameTime = reportItem.Time;
 
         var reportTypeName = reportItem.GetType().Name;
         switch  (reportTypeName)
