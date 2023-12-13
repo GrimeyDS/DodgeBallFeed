@@ -2,7 +2,6 @@
 
 @if (selectedReportType == "Game")
 {
-    InitializeNewGame();
     <GameForm Teams="Teams" Game="Game" OnSave="SaveGame"></GameForm>
 }
 else if (selectedReportType == "Feed")
@@ -29,40 +28,43 @@ else if (selectedReportType == "Feed")
             </div>
         </div>
     }
-    else if (selectedGameId == Guid.Empty || Game is null)
-    {
-        <div class="row">
-            <div class="col">
-                <h3>Please select a game</h3>
-            </div>
-        </div>
-    }
     else
     {
-        switch (selectedSubReportType)
+        if (selectedGameId == Guid.Empty || Game is null)
         {
-            case "General":
-                reportItem = new GeneralReport(Game.GameTime);
-                <GeneralReportForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralReportForm>
-                break;
-            case "Foul":
-                reportItem = new FoulReport(Game.GameTime);
-                <FoulReportForm Teams="gameTeams" Game="Game" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
-                break;
-            case "Team Change":
-                reportItem = new TeamChangeReport(Game.GameTime);
-                <TeamChangeForm Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
-                break;
-            case "Sudden Death":
-                reportItem = new SuddenDeathReport(Game.GameTime);
-                <SuddenDeathForm Teams="gameTeams" Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
-                break;
-            case "Score":
-                reportItem = new ScoreReport(Game.GameTime);
-                <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
-                break;
-            default:
-                break;
+            <div class="row">
+                <div class="col">
+                    <h3>Please select a game</h3>
+                </div>
+            </div>
+        }
+        else
+        {
+            switch (selectedSubReportType)
+            {
+                case "General":
+                    reportItem = new GeneralReport(Game.GameTime);
+                    <GeneralReportForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralReportForm>
+                    break;
+                case "Foul":
+                    reportItem = new FoulReport(Game.GameTime);
+                    <FoulReportForm Teams="gameTeams" Game="Game" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
+                    break;
+                case "Team Change":
+                    reportItem = new TeamChangeReport(Game.GameTime);
+                    <TeamChangeForm Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
+                    break;
+                case "Sudden Death":
+                    reportItem = new SuddenDeathReport(Game.GameTime);
+                    <SuddenDeathForm Teams="gameTeams" Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
+                    break;
+                case "Score":
+                    reportItem = new ScoreReport(Game.GameTime);
+                    <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
@@ -91,15 +93,12 @@ else if (selectedReportType == "Feed")
     private Select _selectReport;
     private Select _selectSubReport;
 
-    private void InitializeNewGame()
-    {
-        Game = new Game();
-        Game.Id = Guid.NewGuid();
-    }
 
     private void ChangeReportType(string selectedItem)
     {
         selectedReportType = selectedItem;
+        if (selectedReportType == "Game")
+            Game = new Game();
     }
 
     private void ChangeSubReportType(string selectedItem)
@@ -151,6 +150,11 @@ else if (selectedReportType == "Feed")
     private void SaveGame(Game game)
     {
         refresh();
+        var firstReport = new GeneralReport(game.GameTime);
+        firstReport.Title = "Game Start";
+        firstReport.ReportMessage = "Game has started. Reports will follow";
+        game.GeneralReports.Add(firstReport);
+        game.GameTime = firstReport.Time;
         OnSave.InvokeAsync(game);
     }
 
