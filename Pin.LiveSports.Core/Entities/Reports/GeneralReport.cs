@@ -7,13 +7,11 @@ namespace Pin.LiveSports.Core.Entities.Reports
 {
     public class GeneralReport(TimeOnly currentGameTime) : IValidatableObject
     {
-        public Guid Id { get; set; }
         [Required]
         public string Title { get; set; }
 
         [Required]
-        [MinTimeOnlyValidator("00:01")]
-        public TimeOnly Time { get; set; } = currentGameTime;
+        public TimeOnly Time { get; set; } = currentGameTime.AddMinutes(1);
 
         [Required]
         public string ReportMessage { get; set; }
