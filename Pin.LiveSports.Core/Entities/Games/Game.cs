@@ -8,11 +8,10 @@ namespace Pin.LiveSports.Core.Entities.Games
     {
         [Required]
         [Range(typeof(DateTime), "1/1/2010", "31/12/2050",
-        ErrorMessage = "Date must be between 01/01/2010 and now")]
+        ErrorMessage = "Date must be between 01/01/2010 and 2050")]
         public DateTime GameDate { get; set; } = DateTime.Now;
 
         [Required]
-        [MinTimeOnlyValidator("00:01")]
         public TimeOnly GameTime { get; set; }
 
         [Required]
@@ -46,6 +45,11 @@ namespace Pin.LiveSports.Core.Entities.Games
                     yield return new ValidationResult("Teams cannot be the same.");
             }
 
+        }
+
+        public Game()
+        {
+            Id = Guid.NewGuid();
         }
     }
 }
