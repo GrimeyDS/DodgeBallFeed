@@ -1,0 +1,12 @@
+﻿#foulBody {
+    display: inline-block;
+}
+
+#foulImgContainer {
+    display: inline-block;
+    
+}
+
+#foulImgContainer img {
+    width: 150px;
+}

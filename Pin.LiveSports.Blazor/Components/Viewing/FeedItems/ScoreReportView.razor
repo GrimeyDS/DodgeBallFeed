@@ -1,0 +1,25 @@
+﻿<li class="event" data-date="@(ReportItem.Time)'">
+    <h3>@scoredTeam.Name HAVE SCORED!</h3>
+    <div>
+        @ReportItem.ReportMessage
+
+        <ScoreCard Game="Game" Teams="Teams"></ScoreCard>
+    </div>
+</li>
+@code {
+    [Parameter]
+    public ScoreReport ReportItem { get; set; }
+
+    [Parameter]
+    public Game Game { get; set; }
+
+    [Parameter]
+    public Team[] Teams { get; set; }
+
+    private Team scoredTeam;
+
+    protected override void OnParametersSet()
+    {
+        scoredTeam = Teams.FirstOrDefault(t => t.Id == ReportItem.ScoredTeam);
+    }
+}

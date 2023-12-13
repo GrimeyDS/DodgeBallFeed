@@ -1,40 +1,24 @@
-﻿<div class="game-next-match" @onclick="e => OnSelect.InvokeAsync(SingleGame)">
+﻿<div class="game-next-match" @onclick="e => OnSelect.InvokeAsync(Game)">
     <div class="game-title">
-        <h3>@SingleGame.Name</h3>
+        <h3>@Game.Name</h3>
     </div>
     <div class="game-body mb-3">
-        <div class="game-vs">
-            <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
-                <div class="team-1 text-center">
-                    <img src="@homeTeam.LogoUrl" alt="Image">
-                    <h3>@homeTeam.Name</h3>
-                    <h4>@SingleGame.HomeScore</h4>
-                </div>
-                <div>
-                    <span class="vs"><span>VS</span></span>
-                </div>
-                <div class="team-2 text-center">
-                    <img src="@awayTeam.LogoUrl" alt="Image">
-                    <h3>@awayTeam.Name</h3>
-                    <h4>@SingleGame.HomeScore</h4>
-                </div>
-            </div>
-        </div>
+        <ScoreCard Game="Game" Teams="Teams"></ScoreCard>
     </div>
 
     <div class="text-center game-vs-contents mb-4">
         <h4>Dodgeball Cup League</h4>
         <p class="mb-5">
-            <span class="d-block">@SingleGame.GameDate.ToShortDateString()</span>
-            <span class="d-block">Duration: @SingleGame.GameTime min</span>
-            <strong class="text-info">@SingleGame.Location</strong>
+            <span class="d-block">@Game.GameDate.ToShortDateString()</span>
+            <span class="d-block">@(Game.GameTime)'</span>
+            <strong class="text-info">@Game.Location</strong>
         </p>
     </div>
 </div>
 
 @code {
     [Parameter]
-    public Game SingleGame { get; set; }
+    public Game Game { get; set; }
 
     [Parameter]
     public EventCallback<Game> OnSelect { get; set; }
@@ -42,12 +26,4 @@
     [Parameter]
     public Team[] Teams { get; set; }
 
-    private Team homeTeam;
-    private Team awayTeam;
-
-    protected override void OnInitialized()
-    {
-        homeTeam = Teams.FirstOrDefault(t => t.Id == SingleGame.HomeTeamId);
-        awayTeam = Teams.FirstOrDefault(t => t.Id == SingleGame.AwayTeamId);
-    }
 }

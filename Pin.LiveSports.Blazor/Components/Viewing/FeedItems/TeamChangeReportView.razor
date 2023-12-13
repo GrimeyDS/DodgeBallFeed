@@ -1,4 +1,4 @@
-﻿<li class="event" data-date="@ReportItem.Time">
+﻿<li class="event" data-date="@(ReportItem.Time)'">
     <h3>@ReportItem.Title</h3>
     <div>
         @ReportItem.ReportMessage
@@ -20,8 +20,8 @@
 
     protected override void OnParametersSet()
     {
-        team = Teams.Where(t => t.Id == ReportItem.TeamId).FirstOrDefault();
-        player = team.Players.Where(p => p.Id == ReportItem.PlayerId).FirstOrDefault();
+        team = Teams.FirstOrDefault(t => t.Id == ReportItem.TeamId);
+        player = team.Players.FirstOrDefault(p => p.Id == ReportItem.PlayerId);
 
         if (ReportItem.IsOut)
             url = "../images/redarrow.png";
