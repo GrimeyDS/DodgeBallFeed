@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Pin.LiveSports.Core.Entities.Games
 {
-    public class Game : BaseEntity
+    public class Game : BaseEntity, IValidatableObject
     {
         [Required]
         [Range(typeof(DateTime), "1/1/2010", "31/12/2050",
@@ -18,10 +18,8 @@ namespace Pin.LiveSports.Core.Entities.Games
         [Required]
         public string Location { get; set; }
 
-        [GuidValidator]
         public Guid HomeTeamId { get; set; }
 
-        [GuidValidator]
         public Guid AwayTeamId { get; set; }
 
         [Required]
@@ -45,6 +43,18 @@ namespace Pin.LiveSports.Core.Entities.Games
             SuddenDeathReports = new List<SuddenDeathReport>();
             TeamChangeReports = new List<TeamChangeReport>();
             ScoreReports = new List<ScoreReport>();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (HomeTeamId == Guid.Empty || AwayTeamId == Guid.Empty)
+                yield return new ValidationResult("Please select a Home and Away team.");
+            else
+            {
+                if (HomeTeamId == AwayTeamId)
+                    yield return new ValidationResult("Teams cannot be the same.");
+            }
+
         }
     }
 }
