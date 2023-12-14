@@ -8,6 +8,8 @@ namespace Pin.LiveSports.Core.Entities.Games
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Country { get; set; }
+
+        public bool IsOut { get; set; }
         public Role Role { get; set; }
     }
 }

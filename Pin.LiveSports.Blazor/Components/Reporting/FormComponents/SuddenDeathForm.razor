@@ -7,15 +7,15 @@
 
         <div class="row">
             <div class="col-3">
-                <label class="col-form-label">Choose player from @HomeTeam.Name</label>
-                <PlayerSelect Team="HomeTeam" TeamId="HomeTeam.Id" OnSelect="SetHomePlayerId"></PlayerSelect>
+                <label class="col-form-label">Choose player from @Game.HomeTeam.Name</label>
+                <PlayerSelect Players="Game.HomeTeam.Players.ToArray()" TeamId="HomeTeam.Id" OnSelect="SetHomePlayerId"></PlayerSelect>
             </div>
         </div>
 
         <div class="row">
             <div class="col-3">
-                <label class="col-form-label">Choose player from @AwayTeam.Name</label>
-                <PlayerSelect Team="AwayTeam" TeamId="AwayTeam.Id" OnSelect="SetAwayPlayerId"></PlayerSelect>
+                <label class="col-form-label">Choose player from @Game.AwayTeam.Name</label>
+                <PlayerSelect Players="Game.AwayTeam.Players.ToArray()"  OnSelect="SetAwayPlayerId"></PlayerSelect>
             </div>
         </div>
 
@@ -33,25 +33,13 @@
     [Parameter]
     public Game Game { get; set; }
 
-    [Parameter]
-    public Team[] Teams { get; set; }
-
-    private Team HomeTeam;
-    private Team AwayTeam;
-
-    protected override void OnInitialized()
-    {
-        HomeTeam = Teams.FirstOrDefault(t => t.Id == Game.HomeTeamId);
-        AwayTeam = Teams.FirstOrDefault(t => t.Id == Game.AwayTeamId);
-    }
-
     private void SetHomePlayerId(Guid id)
     {
-        ReportItem.HomePlayerId = id;
+        ReportItem.HomePlayer = Game.HomeTeam.Players.FirstOrDefault(p => p.Id == id);
     }
 
     private void SetAwayPlayerId(Guid id)
     {
-        ReportItem.AwayPlayerId = id;
+        ReportItem.AwayPlayer = Game.AwayTeam.Players.FirstOrDefault(p => p.Id == id);
     }
 }

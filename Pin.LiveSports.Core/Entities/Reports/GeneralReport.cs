@@ -1,6 +1,4 @@
 ﻿
-
-using Pin.LiveSports.Core.Validators;
 using System.ComponentModel.DataAnnotations;
 
 namespace Pin.LiveSports.Core.Entities.Reports
@@ -16,10 +14,13 @@ namespace Pin.LiveSports.Core.Entities.Reports
         [Required]
         public string ReportMessage { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            var results = new List<ValidationResult>();
             if (Time <= currentGameTime)
-                yield return new ValidationResult("Time cannot be less than the current game time.");
+                results.Add(new ValidationResult("Time cannot be less than the current game time."));
+
+            return results;
         }
     }
 }

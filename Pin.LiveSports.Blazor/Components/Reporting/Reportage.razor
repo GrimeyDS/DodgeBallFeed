@@ -48,7 +48,7 @@ else if (selectedReportType == "Feed")
                     break;
                 case "Foul":
                     reportItem = new FoulReport(Game.GameTime);
-                    <FoulReportForm Teams="gameTeams" Game="Game" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
+                    <FoulReportForm Teams="gameTeams" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
                     break;
                 case "Team Change":
                     reportItem = new TeamChangeReport(Game.GameTime);
@@ -56,7 +56,7 @@ else if (selectedReportType == "Feed")
                     break;
                 case "Sudden Death":
                     reportItem = new SuddenDeathReport(Game.GameTime);
-                    <SuddenDeathForm Teams="gameTeams" Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
+                    <SuddenDeathForm Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
                     break;
                 case "Score":
                     reportItem = new ScoreReport(Game.GameTime);
@@ -112,7 +112,7 @@ else if (selectedReportType == "Feed")
         {
             selectedGameId = Guid.Parse(e.Value.ToString());
             Game = Games.FirstOrDefault(g => g.Id == selectedGameId);
-            gameTeams = Teams.Where(t => t.Id == Game.HomeTeamId || t.Id == Game.AwayTeamId).ToArray();
+            gameTeams = new Team[] { Game.AwayTeam, Game.HomeTeam };
         }
     }
 

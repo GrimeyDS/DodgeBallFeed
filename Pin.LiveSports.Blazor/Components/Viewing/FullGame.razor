@@ -3,7 +3,7 @@
         <h3>@Game.Name</h3>
     </div>
     <div class="game-body mb-3">
-        <ScoreCard Game="Game" Teams="Teams"></ScoreCard>
+        <ScoreCard Game="Game"></ScoreCard>
     </div>
 
     <div class="text-center game-vs-contents mb-4">
@@ -22,8 +22,4 @@
 
     [Parameter]
     public EventCallback<Game> OnSelect { get; set; }
-
-    [Parameter]
-    public Team[] Teams { get; set; }
-
 }

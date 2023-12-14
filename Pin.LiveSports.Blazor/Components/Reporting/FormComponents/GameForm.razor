@@ -71,12 +71,12 @@
 
     private void SetHomeTeam(Guid id)
     {
-        Game.HomeTeamId = id;
+        Game.HomeTeam = Teams.SingleOrDefault(t => t.Id == id);
     }
 
     private void SetAwayTeam(Guid id)
     {
-        Game.AwayTeamId = id;
+        Game.AwayTeam = Teams.SingleOrDefault(t => t.Id == id);
     }
 }
 s

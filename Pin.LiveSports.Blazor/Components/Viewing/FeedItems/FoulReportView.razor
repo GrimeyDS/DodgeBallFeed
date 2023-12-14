@@ -6,21 +6,11 @@
     </div>
 
     <div id="foulBody">
-        <h2>@player.FirstName @player.LastName</h2>
+        <h2>@ReportItem.Player.FirstName @ReportItem.Player.LastName</h2>
         @ReportItem.ReportMessage
     </div>
 </li>
 @code {
     [Parameter]
     public FoulReport ReportItem { get; set; }
-
-    [Parameter]
-    public Team[] Teams { get; set; }
-
-    private Player player;
- 
-    protected override void OnParametersSet()
-    {
-        player = Teams.SelectMany(t => t.Players).FirstOrDefault(p => p.Id == ReportItem.PlayerId);
-    }
 }

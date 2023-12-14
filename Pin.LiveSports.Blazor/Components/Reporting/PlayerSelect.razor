@@ -1,42 +1,19 @@
 ﻿
-@if (TeamId != Guid.Empty)
-{
-    GetPlayers();
+
     <InputSelect class="form-select" id="player" TValue="Guid" @bind-Value="playerId" @onmouseup="e => OnSelect.InvokeAsync(playerId)">
         <option disabled selected>Select a Player</option>
-        @foreach (var player in players)
+        @foreach (var player in Players)
         {
             <option value="@player.Id">@player.FirstName @player.LastName</option>
         }
     </InputSelect>
-}
 
 @code {
     [Parameter]
     public EventCallback<Guid> OnSelect { get; set; }
 
     [Parameter]
-    public Team[] Teams { get; set; }
-
-    [Parameter]
-    public Team Team { get; set; }
-
-    [Parameter]
-    public Guid TeamId { get; set; }
-
-    private Player[] players;
+    public Player[] Players { get; set; }
 
     public Guid playerId;
-
-    protected override void OnInitialized()
-    {
-        if (Team is not null)
-            Teams = new Team[] { Team };
-    }
-
-    private void GetPlayers()
-    {
-        var team = Teams.SingleOrDefault(t => t.Id == TeamId);
-        players = team.Players.ToArray();
-    }
 }

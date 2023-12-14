@@ -8,13 +8,11 @@
         <div class="row">
             <div class="col-3">
                 <label class="col-form-label" for="player">Foul player</label>
-                <InputSelect class="form-select" id="homeTeam" TValue="Guid" @bind-Value="ReportItem.PlayerId">
-                    @foreach (var player in AllPlayers)
-                    {
-                        <option value="@player.Id">@player.FirstName @player.LastName</option>
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(() => ReportItem.PlayerId)" />
+                @if (players != null)
+                {
+                    <PlayerSelect Players="players" OnSelect="SetPlayer"></PlayerSelect>
+                }
+                    
             </div>
         </div>
 
@@ -31,17 +29,17 @@
     public FoulReport ReportItem { get; set; }
 
     [Parameter]
-    public Game Game { get; set; }
-
-    [Parameter]
     public Team[] Teams { get; set; }
 
-    private Player[] AllPlayers;
+    private Player[] players;
 
     protected override void OnInitialized()
     {
-        Player[] HomePlayers = Teams.FirstOrDefault(t => t.Id == Game.HomeTeamId).Players.ToArray();
-        Player[] AwayPlayers = Teams.FirstOrDefault(t => t.Id == Game.AwayTeamId).Players.ToArray();
-        AllPlayers = [..HomePlayers, ..AwayPlayers];
+        players = Teams.SelectMany(t => t.Players).ToArray();
+    }
+
+    private void SetPlayer(Guid playerId)
+    {
+        ReportItem.Player = players.FirstOrDefault(p => p.Id == playerId);
     }
 }

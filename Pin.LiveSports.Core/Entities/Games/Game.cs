@@ -1,5 +1,4 @@
 ﻿using Pin.LiveSports.Core.Entities.Reports;
-using Pin.LiveSports.Core.Validators;
 using System.ComponentModel.DataAnnotations;
 
 namespace Pin.LiveSports.Core.Entities.Games
@@ -19,7 +18,11 @@ namespace Pin.LiveSports.Core.Entities.Games
 
         public Guid HomeTeamId { get; set; }
 
+        public Team HomeTeam { get; set; }
+
         public Guid AwayTeamId { get; set; }
+
+        public Team AwayTeam { get; set; }
 
         [Required]
         [Range(0, 100)]
@@ -37,14 +40,18 @@ namespace Pin.LiveSports.Core.Entities.Games
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (HomeTeamId == Guid.Empty || AwayTeamId == Guid.Empty)
+            if(HomeTeam is null || AwayTeam is null)
                 yield return new ValidationResult("Please select a Home and Away team.");
             else
             {
-                if (HomeTeamId == AwayTeamId)
-                    yield return new ValidationResult("Teams cannot be the same.");
+                if (HomeTeam.Id == Guid.Empty || AwayTeam.Id == Guid.Empty)
+                    yield return new ValidationResult("Please select a Home and Away team.");
+                else
+                {
+                    if (HomeTeam.Id == AwayTeam.Id)
+                        yield return new ValidationResult("Teams cannot be the same.");
+                }
             }
-
         }
 
         public Game()

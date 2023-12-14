@@ -33,12 +33,12 @@
 
     private void SetScoredTeam(Guid id)
     {
-        ReportItem.ScoredTeam = id;
+        ReportItem.ScoredTeam = Teams.FirstOrDefault(t => t.Id == id);
     }
 
     private void SetReportScore()
     {
-        if (ReportItem.ScoredTeam == Game.HomeTeamId)
+        if (ReportItem.ScoredTeam == Game.HomeTeam)
             Game.HomeScore++;
         else
             Game.AwayScore++;

@@ -10,13 +10,13 @@
                     <GeneralReportView ReportItem="report"></GeneralReportView>
                     break;
                 case nameof(TeamChangeReport):
-                    <TeamChangeReportView Teams="gameTeams" ReportItem="(TeamChangeReport)report"></TeamChangeReportView>
+                    <TeamChangeReportView ReportItem="(TeamChangeReport)report"></TeamChangeReportView>
                     break;
                 case nameof(FoulReport):
-                    <FoulReportView Teams="gameTeams" ReportItem="(FoulReport)report"></FoulReportView>
+                    <FoulReportView ReportItem="(FoulReport)report"></FoulReportView>
                     break;
                 case nameof(ScoreReport):
-                    <ScoreReportView Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)report"></ScoreReportView>
+                    <ScoreReportView Game="Game" ReportItem="(ScoreReport)report"></ScoreReportView>
                     break;
                 default:
                     break;
@@ -32,17 +32,11 @@
     [Parameter]
     public Game Game { get; set; }
 
-    [Parameter]
-    public Team[] Teams { get; set; }
-
     private GeneralReport[] reports;
-    private Team[] gameTeams;
 
     protected override void OnParametersSet()
     {
         reports = [.. Game.GeneralReports, .. Game.TeamChangeReports, .. Game.SuddenDeathReports, .. Game.ScoreReports, .. Game.FoulReports];
         reports = reports.OrderByDescending(x => x.Time).ToArray();
-
-        gameTeams = Teams.Where(t => t.Id == Game.HomeTeamId || t.Id == Game.AwayTeamId).ToArray();
     }
 }

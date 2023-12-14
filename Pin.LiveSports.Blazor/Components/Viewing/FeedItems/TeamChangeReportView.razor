@@ -3,7 +3,7 @@
     <div>
         @ReportItem.ReportMessage
         <div id="playerChangeContainer">
-            <img id="arrow" src="@url" alt="player-change"/>@player.FirstName @player.LastName - @team.Name
+            <img id="arrow" src="@url" alt="player-change" />@ReportItem.Player.FirstName @ReportItem.Player.LastName - @ReportItem.Team.Name
         </div>
     </div>
 </li>
@@ -11,19 +11,12 @@
     [Parameter]
     public TeamChangeReport ReportItem { get; set; }
 
-    [Parameter]
-    public Team[] Teams { get; set; }
-
-    private Player player;
-    private Team team;
     private string url;
 
     protected override void OnParametersSet()
     {
-        team = Teams.FirstOrDefault(t => t.Id == ReportItem.TeamId);
-        player = team.Players.FirstOrDefault(p => p.Id == ReportItem.PlayerId);
 
-        if (ReportItem.IsOut)
+        if (ReportItem.Player.IsOut)
             url = "../images/redarrow.png";
         else
             url = "../images/greenarrow.png";
