@@ -1,0 +1,19 @@
+﻿#playerIn, #playerOut {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#playerIn {
+    background-color: green;
+}
+
+#playerOut {
+    background-color: red;
+}
+
+#playerContainer {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -3,3 +3,19 @@
     margin-top: 10px;
     height: fit-content;
 }
+
+#head {
+    width: 10px;
+    display: inline-block;
+    background-color: #ee1e46;
+    height: 25px;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+}
+
+h3 {
+    display: inline-block;
+    font-size: 30px;
+    margin-bottom: 0px;
+}

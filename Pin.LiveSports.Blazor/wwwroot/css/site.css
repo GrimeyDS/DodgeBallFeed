@@ -159,7 +159,8 @@ h3 {
 }
 
     .game-vs img {
-        max-width: 120px;
+        margin-top: 10px;
+        max-width: 100px;
     }
 
     .game-vs h3 {
@@ -193,25 +194,12 @@ h3 {
     margin-bottom: 10px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
-    height: 400px;
+    height: 350px;
     color: grey;
 }
 
-
-.game-title {
-    padding: 16px 20px;
-    color: #fff;
-    background-color: #ee1e46;
-}
-
-    .game-title h3 {
-        margin: 0;
-        padding: 0;
-        font-size: 16px;
-        color: #fff;
-        font-weight: 700;
-    }
-
 .game-body {
     padding: 20px;
+    padding-top: 0px;
 }
+

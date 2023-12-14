@@ -1,0 +1,18 @@
+﻿<ul class="list-unstyled">
+
+    @foreach (var player in Players)
+    {
+        if (player.IsOut)
+        {
+            <li><s>@player.FirstName @player.LastName</s></li>
+        }
+        else
+        {
+            <li>@player.FirstName @player.LastName</li>
+        }
+    }
+</ul>
+@code {
+    [Parameter]
+    public Player[] Players { get; set; }
+}

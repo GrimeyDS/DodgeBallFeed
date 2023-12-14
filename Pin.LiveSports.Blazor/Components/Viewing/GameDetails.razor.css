@@ -1,0 +1,63 @@
+﻿.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+.team-vs {
+    background-color: #ee1e46;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: -40px;
+    position: relative;
+    z-index: 1;
+}
+
+.score {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: white;
+    letter-spacing: 2px;
+    font-weight: bold;
+    z-index:2;
+}
+
+.team-1, .team-2 {
+    padding: 30px;
+}
+
+.team-details, .team-2 {
+    position: relative;
+}
+
+
+.team-2:before {
+    position: absolute;
+    background-color: black;
+    content : "";
+    left: -12%;
+    right: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    transform: skew(-15deg);
+}
+
+img {
+    width: 30%;
+}
+
+h3 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -4,6 +4,9 @@
             <img src="@Game.HomeTeam.LogoUrl" alt="Image">
             <h3>@Game.HomeTeam.Name</h3>
             <h4>@Game.HomeScore</h4>
+
+            <PlayerListCompact Team="Game.HomeTeam" IsCompact="IsCompact" ></PlayerListCompact>
+
         </div>
         <div>
             <span class="vs"><span>VS</span></span>
@@ -12,6 +15,9 @@
             <img src="@Game.AwayTeam.LogoUrl" alt="Image">
             <h3>@Game.AwayTeam.Name</h3>
             <h4>@Game.AwayScore</h4>
+
+            <PlayerListCompact Team="Game.AwayTeam" IsCompact="IsCompact"></PlayerListCompact>
+
         </div>
     </div>
 </div>
@@ -19,4 +25,7 @@
 @code {
     [Parameter]
     public Game Game { get; set; }
+
+    [Parameter]
+    public bool IsCompact { get; set; } = false;
 }
