@@ -16,11 +16,7 @@ namespace Pin.LiveSports.Core.Entities.Games
         [Required]
         public string Location { get; set; }
 
-        public Guid HomeTeamId { get; set; }
-
         public Team HomeTeam { get; set; }
-
-        public Guid AwayTeamId { get; set; }
 
         public Team AwayTeam { get; set; }
 
