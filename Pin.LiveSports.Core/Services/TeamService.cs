@@ -22,7 +22,8 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-                            FirstName = "Jaan",
+                            PictureUrl = "images/players/belgium.jpg",
+                            FirstName = "Jan",
                             LastName = "De Bol",
                             Country = "Belgium",
                             Role = Role.Captain
@@ -30,6 +31,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                            PictureUrl = "images/players/belgium.jpg",
                             FirstName = "Mieke",
                             LastName = "Vanlandschoot",
                             Country = "Belgium",
@@ -38,6 +40,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000003"),
+                            PictureUrl = "images/players/belgium.jpg",
                             FirstName = "Sarah",
                             LastName = "De Zutter",
                             Country = "Belgium",
@@ -46,6 +49,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                            PictureUrl = "images/players/belgium.jpg",
                             FirstName = "Bart",
                             LastName = "Smoet",
                             Country = "Belgium",
@@ -64,6 +68,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                            PictureUrl = "images/players/canadian.jpg",
                             FirstName = "Chloe",
                             LastName = "Ola",
                             Country = "Canada",
@@ -72,6 +77,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000006"),
+                            PictureUrl = "images/players/canadian.jpg",
                             FirstName = "Amelia",
                             LastName = "Swan",
                             Country = "Canada",
@@ -80,6 +86,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                            PictureUrl = "images/players/canadian.jpg",
                             FirstName = "Clive",
                             LastName = "Rosaria",
                             Country = "Canada",
@@ -88,6 +95,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                            PictureUrl = "images/players/canadian.jpg",
                             FirstName = "Sid",
                             LastName = "Cloud",
                             Country = "Canada",
@@ -106,6 +114,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                            PictureUrl = "images/players/india.png",
                             FirstName = "Ishita",
                             LastName = "Kashvi",
                             Country = "India",
@@ -114,6 +123,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                            PictureUrl = "images/players/india.png",
                             FirstName = "Asmee",
                             LastName = "Ishana",
                             Country = "India",
@@ -122,6 +132,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                            PictureUrl = "images/players/india.png",
                             FirstName = "Anaisha",
                             LastName = "Ananya",
                             Country = "India",
@@ -130,6 +141,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000012"),
+                            PictureUrl = "images/players/india.png",
                             FirstName = "Anala",
                             LastName = "Adah",
                             Country = "India",
@@ -148,6 +160,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000013"),
+                            PictureUrl = "images/players/american.png",
                             FirstName = "Mike",
                             LastName = "Longshot",
                             Country = "USA",
@@ -156,6 +169,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000014"),
+                            PictureUrl = "images/players/american.png",
                             FirstName = "Joshua",
                             LastName = "Renfield",
                             Country = "USA",
@@ -164,6 +178,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000015"),
+                            PictureUrl = "images/players/american.png",
                             FirstName = "Jack",
                             LastName = "Baur",
                             Country = "USA",
@@ -172,6 +187,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000016"),
+                            PictureUrl = "images/players/american.png",
                             FirstName = "Jill",
                             LastName = "McAllister",
                             Country = "USA",
@@ -190,6 +206,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000017"),
+                            PictureUrl = "images/players/australian.jpg",
                             FirstName = "Mia",
                             LastName = "Zeke",
                             Country = "Australia",
@@ -198,6 +215,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000018"),
+                            PictureUrl = "images/players/australian.jpg",
                             FirstName = "Henry",
                             LastName = "Cavil",
                             Country = "Australia",
@@ -206,6 +224,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000019"),
+                            PictureUrl = "images/players/australian.jpg",
                             FirstName = "Willliam",
                             LastName = "Genova",
                             Country = "Australia",
@@ -214,6 +233,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000020"),
+                            PictureUrl = "images/players/australian.jpg",
                             FirstName = "Isla",
                             LastName = "Maximillian",
                             Country = "Australia",
@@ -232,6 +252,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000021"),
+                            PictureUrl = "images/players/chinese.jpg",
                             FirstName = "Ai",
                             LastName = "Yang",
                             Country = "China",
@@ -240,6 +261,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000022"),
+                            PictureUrl = "images/players/chinese.jpg",
                             FirstName = "Zhao",
                             LastName = "Huang",
                             Country = "China",
@@ -248,6 +270,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000023"),
+                            PictureUrl = "images/players/chinese.jpg",
                             FirstName = "Zhang",
                             LastName = "Li",
                             Country = "China",
@@ -256,6 +279,7 @@ namespace Pin.LiveSports.Core.Services
                         new Player()
                         {
                             Id = Guid.Parse("00000000-0000-0000-0000-000000000024"),
+                            PictureUrl = "images/players/chinese.jpg",
                             FirstName = "Liu",
                             LastName = "Wan",
                             Country = "China",

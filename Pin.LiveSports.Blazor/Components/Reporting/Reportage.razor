@@ -52,7 +52,7 @@ else if (selectedReportType == "Feed")
                     break;
                 case "Team Change":
                     reportItem = new TeamChangeReport(Game.GameTime);
-                    <TeamChangeForm Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
+                    <TeamChangeForm Game="Game" Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
                     break;
                 case "Sudden Death":
                     reportItem = new SuddenDeathReport(Game.GameTime);
