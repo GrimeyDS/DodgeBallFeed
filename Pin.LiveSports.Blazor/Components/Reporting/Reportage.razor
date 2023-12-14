@@ -44,11 +44,11 @@ else if (selectedReportType == "Feed")
             {
                 case "General":
                     reportItem = new GeneralReport(Game.GameTime);
-                    <GeneralReportForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralReportForm>
+                    <GeneralForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralForm>
                     break;
                 case "Foul":
                     reportItem = new FoulReport(Game.GameTime);
-                    <FoulReportForm Teams="gameTeams" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulReportForm>
+                    <FoulForm Teams="gameTeams" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulForm>
                     break;
                 case "Team Change":
                     reportItem = new TeamChangeReport(Game.GameTime);
