@@ -1,5 +1,5 @@
 ﻿<div class="row">
-    <EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form">
+    <EditForm Model="@ReportItem" OnValidSubmit="SetGamePlayer" class="form">
         <DataAnnotationsValidator></DataAnnotationsValidator>
         <ValidationSummary></ValidationSummary>
 
@@ -45,6 +45,9 @@
     [Parameter]
     public Team[] Teams { get; set; }
 
+    [Parameter]
+    public Game Game { get; set; }
+
     private Player[] teamPlayers;
 
     private void SetTeam(Guid id)
@@ -57,5 +60,12 @@
     private void SetPlayer(Guid id)
     {
         ReportItem.Player = teamPlayers.FirstOrDefault(p => p.Id == id);
+    }
+
+    private void SetGamePlayer()
+    {
+        var player = Teams.SelectMany(t => t.Players).FirstOrDefault(p => p.Id == ReportItem.Player.Id);
+        player.IsOut = ReportItem.Player.IsOut;
+        OnSave.InvokeAsync(ReportItem);
     }
 }
