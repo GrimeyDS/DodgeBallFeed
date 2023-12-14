@@ -15,8 +15,7 @@
 
     protected override void OnParametersSet()
     {
-
-        if (ReportItem.Player.IsOut)
+        if (ReportItem.IsOut)
             url = "../images/redarrow.png";
         else
             url = "../images/greenarrow.png";

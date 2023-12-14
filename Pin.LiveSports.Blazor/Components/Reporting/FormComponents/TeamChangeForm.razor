@@ -64,8 +64,8 @@
 
     private void SetGamePlayer()
     {
-        var player = Teams.SelectMany(t => t.Players).FirstOrDefault(p => p.Id == ReportItem.Player.Id);
-        player.IsOut = ReportItem.Player.IsOut;
+
+        ReportItem.IsOut = ReportItem.Player.IsOut;
         OnSave.InvokeAsync(ReportItem);
     }
 }
