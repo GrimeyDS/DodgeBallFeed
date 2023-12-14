@@ -15,7 +15,7 @@
         <div class="col-4" id="allGames">
             @foreach (Game game in games)
             {
-                <FullGame Game="game" OnSelect="SelectGame"></FullGame>
+                <GameWidget Game="game" OnSelect="SelectGame"></GameWidget>
             }
         </div>
     }

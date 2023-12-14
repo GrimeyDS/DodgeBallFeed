@@ -7,16 +7,16 @@
             switch (typeName)
             {
                 case nameof(GeneralReport):
-                    <GeneralReportView ReportItem="report"></GeneralReportView>
+                    <GameGeneralReports ReportItem="report"></GameGeneralReports>
                     break;
                 case nameof(TeamChangeReport):
-                    <TeamChangeReportView ReportItem="(TeamChangeReport)report"></TeamChangeReportView>
+                    <GameTeamChanges ReportItem="(TeamChangeReport)report"></GameTeamChanges>
                     break;
                 case nameof(FoulReport):
-                    <FoulReportView ReportItem="(FoulReport)report"></FoulReportView>
+                    <GameFouls ReportItem="(FoulReport)report"></GameFouls>
                     break;
                 case nameof(ScoreReport):
-                    <ScoreReportView Game="Game" ReportItem="(ScoreReport)report"></ScoreReportView>
+                    <GameScores Game="Game" ReportItem="(ScoreReport)report"></GameScores>
                     break;
                 default:
                     break;
