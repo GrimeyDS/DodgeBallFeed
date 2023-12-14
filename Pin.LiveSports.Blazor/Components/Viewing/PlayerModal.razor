@@ -1,0 +1,46 @@
+﻿
+@if (IsVisible)
+{
+    <div class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Player.FirstName @Player.LastName</h5>
+                    <button type="button" class="btn-close btn-close-white" @onclick="CloseModal" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="@Player.PictureUrl" alt="@Player.FirstName @Player.LastName" class="img-fluid">
+                    <div>
+                        <b>Country: </b>@Player.Country<br />
+                        <b>Role: </b>@Player.Role<br />
+                        <b>Description: </b><br />@Player.Description
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseModal" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+@code {
+    [Parameter]
+    public Player Player { get; set; }
+
+    [Parameter]
+    public bool IsVisible { get; set; } = false;
+
+    [Parameter]
+    public EventCallback OnSave { get; set; }
+
+    private void CloseModal()
+    {
+        IsVisible = false; 
+        OnSave.InvokeAsync();
+    }
+}

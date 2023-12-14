@@ -8,3 +8,8 @@ s {
     font-size: 0.8rem;
     font-weight: bold;
 }
+
+li:hover {
+    cursor: pointer;
+    color: darkgreen;
+}
