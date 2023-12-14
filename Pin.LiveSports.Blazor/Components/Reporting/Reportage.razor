@@ -40,35 +40,43 @@ else if (selectedReportType == "Feed")
         }
         else
         {
-            switch (selectedSubReportType)
-            {
-                case "General":
-                    reportItem = new GeneralReport(Game.GameTime);
-                    <GeneralForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralForm>
-                    break;
-                case "Foul":
-                    reportItem = new FoulReport(Game.GameTime);
-                    <FoulForm Teams="gameTeams" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulForm>
-                    break;
-                case "Team Change":
-                    reportItem = new TeamChangeReport(Game.GameTime);
-                    <TeamChangeForm Game="Game" Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
-                    break;
-                case "Sudden Death":
-                    reportItem = new SuddenDeathReport(Game.GameTime);
-                    <SuddenDeathForm Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
-                    break;
-                case "Score":
-                    reportItem = new ScoreReport(Game.GameTime);
-                    <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
-                    break;
-                case "Win":
-                    reportItem = new WinReport(Game.GameTime);
-                    <WinForm  Teams="gameTeams" ReportItem="(WinReport)reportItem" OnSave="SaveReportItem"></WinForm>
-                    break;
-                default:
-                    break;
-            }
+            <div class="row">
+                <div class="form-control col">
+                    @switch (selectedSubReportType)
+                    {
+                        case "General":
+                            reportItem = new GeneralReport(Game.GameTime);
+                            <GeneralForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralForm>
+                            break;
+                        case "Foul":
+                            reportItem = new FoulReport(Game.GameTime);
+                            <FoulForm Teams="gameTeams" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulForm>
+                            break;
+                        case "Team Change":
+                            reportItem = new TeamChangeReport(Game.GameTime);
+                            <TeamChangeForm Game="Game" Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
+                            break;
+                        case "Sudden Death":
+                            reportItem = new SuddenDeathReport(Game.GameTime);
+                            <SuddenDeathForm Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
+                            break;
+                        case "Score":
+                            reportItem = new ScoreReport(Game.GameTime);
+                            <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
+                            break;
+                        case "Win":
+                            reportItem = new WinReport(Game.GameTime);
+                            <WinForm  Teams="gameTeams" ReportItem="(WinReport)reportItem" OnSave="SaveReportItem"></WinForm>
+                            break;
+                        default:
+                            break;
+                    }
+                </div>
+
+                <div class="col-4">
+                    <GameWidget Game="Game"></GameWidget>
+                </div>
+            </div>
         }
     }
 }
@@ -137,6 +145,7 @@ else if (selectedReportType == "Feed")
                 break;
             case nameof(TeamChangeReport):
                 Game.TeamChangeReports.Add((TeamChangeReport)reportItem);
+                CheckPlayerStatus();
                 break;
             case nameof(SuddenDeathReport):
                 Game.SuddenDeathReports.Add((SuddenDeathReport)reportItem);
@@ -172,5 +181,49 @@ else if (selectedReportType == "Feed")
             _selectSubReport.Refresh();
         selectedReportType = "none";
         selectedSubReportType = "none";
+    }
+
+    private void CheckPlayerStatus()
+    {
+        //check if all players are out in a team
+        foreach (var team in gameTeams)
+        {
+            if (team.Players.Where(p => p.IsOut == false).Count() == 0)
+            {
+                var scoreReport = new ScoreReport(Game.GameTime);
+                scoreReport.Title = "";
+                scoreReport.ReportMessage = "All players are out in " + team.Name;
+                scoreReport.ScoredTeam = gameTeams.FirstOrDefault(t => t.Id != team.Id);
+
+                Game.GameTime = scoreReport.Time;
+
+                if (scoreReport.ScoredTeam.Id == Game.HomeTeam.Id)
+                    Game.HomeScore++;
+                else
+                    Game.AwayScore++;
+
+                Game.ScoreReports.Add(scoreReport);
+
+                ResetGame();
+            }
+        }
+    }
+
+    private void ResetGame()
+    {
+        foreach (var team in gameTeams)
+        {
+            foreach (var player in team.Players)
+            {
+                player.IsOut = false;
+            }
+        }
+
+        var generalReport = new GeneralReport(Game.GameTime);
+        generalReport.Title = "Game Reset";
+        generalReport.ReportMessage = "All players are returning to the court and the next game will start soon.";
+        Game.GameTime = generalReport.Time;
+
+        Game.GeneralReports.Add(generalReport);
     }
 }

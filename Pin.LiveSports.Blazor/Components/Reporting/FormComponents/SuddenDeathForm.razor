@@ -1,27 +1,25 @@
-﻿<div class="row">
-    <EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form">
-        <DataAnnotationsValidator></DataAnnotationsValidator>
-        <ValidationSummary></ValidationSummary>
+﻿<EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
 
-        <BaseForm ReportItem="ReportItem"></BaseForm>
+    <BaseForm ReportItem="ReportItem"></BaseForm>
 
-        <div class="row">
-            <div class="col-3">
-                <label class="col-form-label">Choose player from @Game.HomeTeam.Name</label>
-                <PlayerSelect Players="Game.HomeTeam.Players.ToArray()" OnSelect="SetHomePlayerId"></PlayerSelect>
-            </div>
+    <div class="row">
+        <div class="col-4">
+            <label class="col-form-label">Choose player from @Game.HomeTeam.Name</label>
+            <PlayerSelect Players="Game.HomeTeam.Players.ToArray()" OnSelect="SetHomePlayerId"></PlayerSelect>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-3">
-                <label class="col-form-label">Choose player from @Game.AwayTeam.Name</label>
-                <PlayerSelect Players="Game.AwayTeam.Players.ToArray()"  OnSelect="SetAwayPlayerId"></PlayerSelect>
-            </div>
+    <div class="row">
+        <div class="col-4">
+            <label class="col-form-label">Choose player from @Game.AwayTeam.Name</label>
+            <PlayerSelect Players="Game.AwayTeam.Players.ToArray()"  OnSelect="SetAwayPlayerId"></PlayerSelect>
         </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
-    </EditForm>
-</div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
 
 @code {
     [Parameter]

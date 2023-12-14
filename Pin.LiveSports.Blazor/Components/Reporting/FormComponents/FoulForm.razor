@@ -1,25 +1,22 @@
-﻿<div class="row">
-    <EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form" >
-        <DataAnnotationsValidator></DataAnnotationsValidator>
-        <ValidationSummary></ValidationSummary>
+﻿<EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form" >
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
 
-        <BaseForm ReportItem="ReportItem"></BaseForm>
+    <BaseForm ReportItem="ReportItem"></BaseForm>
 
-        <div class="row">
-            <div class="col-3">
-                <label class="col-form-label" for="player">Foul player</label>
-                @if (players != null)
-                {
-                    <PlayerSelect Players="players" OnSelect="SetPlayer"></PlayerSelect>
-                }
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label" for="player">Foul player</label>
+            @if (players != null)
+            {
+                <PlayerSelect Players="players" OnSelect="SetPlayer"></PlayerSelect>
+            }
                     
-            </div>
         </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
-    </EditForm>
-</div>
-
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
 
 @code {
     [Parameter]
