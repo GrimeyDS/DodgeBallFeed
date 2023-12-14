@@ -62,6 +62,10 @@ else if (selectedReportType == "Feed")
                     reportItem = new ScoreReport(Game.GameTime);
                     <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
                     break;
+                case "Win":
+                    reportItem = new WinReport(Game.GameTime);
+                    <WinForm  Teams="gameTeams" ReportItem="(WinReport)reportItem" OnSave="SaveReportItem"></WinForm>
+                    break;
                 default:
                     break;
             }
@@ -82,7 +86,7 @@ else if (selectedReportType == "Feed")
     public List<Game> Games { get; set; }
 
     private string[] reportTypes = new string[] { "Game", "Feed" };
-    private string[] subReportTypes = new string[] { "General", "Foul", "Team Change", "Sudden Death", "Score" };
+    private string[] subReportTypes = new string[] { "General", "Foul", "Team Change", "Sudden Death", "Score", "Win" };
     private string selectedReportType;
     private string selectedSubReportType;
     private Guid selectedGameId;
@@ -139,6 +143,9 @@ else if (selectedReportType == "Feed")
                 break;
             case nameof(ScoreReport):
                 Game.ScoreReports.Add((ScoreReport)reportItem);
+                break;
+            case nameof(WinReport):
+                Game.WinReports.Add((WinReport)reportItem);
                 break;
             default:
                 break;

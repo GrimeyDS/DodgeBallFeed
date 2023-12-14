@@ -32,11 +32,12 @@ namespace Pin.LiveSports.Core.Entities.Games
         [Range(0, 100)]
         public int AwayScore { get; set; }
 
-        public List<GeneralReport> GeneralReports { get; set; } = new List<GeneralReport>();
-        public List<FoulReport> FoulReports { get; set; } = new List<FoulReport>();
-        public List<SuddenDeathReport> SuddenDeathReports { get; set; } = new List<SuddenDeathReport>();
-        public List<TeamChangeReport> TeamChangeReports { get; set; } = new List<TeamChangeReport>();
-        public List<ScoreReport> ScoreReports { get; set; } = new List<ScoreReport>();
+        public ICollection<GeneralReport> GeneralReports { get; set; } = new List<GeneralReport>();
+        public ICollection<FoulReport> FoulReports { get; set; } = new List<FoulReport>();
+        public ICollection<SuddenDeathReport> SuddenDeathReports { get; set; } = new List<SuddenDeathReport>();
+        public ICollection<TeamChangeReport> TeamChangeReports { get; set; } = new List<TeamChangeReport>();
+        public ICollection<ScoreReport> ScoreReports { get; set; } = new List<ScoreReport>();
+        public ICollection<WinReport> WinReports { get; set; } = new List<WinReport>();
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

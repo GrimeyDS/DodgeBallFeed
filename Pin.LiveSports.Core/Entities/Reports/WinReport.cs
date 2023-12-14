@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Pin.LiveSports.Core.Entities.Reports
 {
-    public class ScoreReport(TimeOnly currentGameTime) : GeneralReport(currentGameTime)
+    public class WinReport(TimeOnly currentGameTime) : GeneralReport(currentGameTime)
     {
-        public Team ScoredTeam { get; set; }
+        public Team WinningTeam { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var results = base.Validate(validationContext).ToList();
-            if (ScoredTeam is null)
+            if (WinningTeam is null)
                 results.Add(new ValidationResult("Please select a Team."));
 
             return results;

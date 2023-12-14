@@ -21,6 +21,9 @@
                 case nameof(SuddenDeathReport):
                     <GameSuddenDeaths Game="Game" ReportItem="(SuddenDeathReport)report"></GameSuddenDeaths>
                     break;
+                case nameof(WinReport):
+                    <GameWin Game="Game" ReportItem="(WinReport)report"></GameWin>
+                    break;
                 default:
                     break;
             }
@@ -39,7 +42,7 @@
 
     protected override void OnParametersSet()
     {
-        reports = [.. Game.GeneralReports, .. Game.TeamChangeReports, .. Game.SuddenDeathReports, .. Game.ScoreReports, .. Game.FoulReports];
+        reports = [.. Game.GeneralReports, .. Game.TeamChangeReports, .. Game.SuddenDeathReports, .. Game.ScoreReports, .. Game.FoulReports, .. Game.WinReports];
         reports = reports.OrderByDescending(x => x.Time).ToArray();
     }
 }
