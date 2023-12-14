@@ -18,6 +18,9 @@
                 case nameof(ScoreReport):
                     <GameScores Game="Game" ReportItem="(ScoreReport)report"></GameScores>
                     break;
+                case nameof(SuddenDeathReport):
+                    <GameSuddenDeaths Game="Game" ReportItem="(SuddenDeathReport)report"></GameSuddenDeaths>
+                    break;
                 default:
                     break;
             }
