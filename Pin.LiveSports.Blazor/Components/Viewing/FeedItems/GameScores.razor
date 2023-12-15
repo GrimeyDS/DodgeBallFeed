@@ -1,15 +1,14 @@
-﻿<li class="event" data-date="@(ReportItem.Time)'">
+﻿@inherits Pin.LiveSports.Blazor.Components.Viewing.BaseGameComponent
+
+<li class="event" data-date="@(ReportItem.Time)'">
     <h3>@ReportItem.ScoredTeam.Name HAVE SCORED!</h3>
     <div>
         @ReportItem.ReportMessage
 
-        <ScoreCard Game="Game"></ScoreCard>
+        <ScoreCard ReportItem="ReportItem" Game="Game"></ScoreCard>
     </div>
 </li>
 @code {
     [Parameter]
     public ScoreReport ReportItem { get; set; }
-
-    [Parameter]
-    public Game Game { get; set; }
 }

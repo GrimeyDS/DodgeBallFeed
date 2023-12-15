@@ -1,4 +1,6 @@
-﻿<li class="event" data-date="@(ReportItem.Time)'">
+﻿@inherits Pin.LiveSports.Blazor.Components.Viewing.BaseGameComponent
+
+<li class="event" data-date="@(ReportItem.Time)'">
     <h3 class="text-center">SUDDEN DEATH!</h3>
 
     <div class="game-vs">
@@ -22,7 +24,4 @@
 @code {
     [Parameter]
     public SuddenDeathReport ReportItem { get; set; }
-
-    [Parameter]
-    public Game Game { get; set; }
 }

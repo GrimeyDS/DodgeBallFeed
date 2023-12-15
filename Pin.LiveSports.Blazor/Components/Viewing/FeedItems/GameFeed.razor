@@ -1,4 +1,5 @@
-﻿
+﻿@inherits Pin.LiveSports.Blazor.Components.Viewing.BaseGameComponent
+
 <div id="feedContainer">
     <ul class="timeline">
         @foreach (var report in reports)
@@ -32,9 +33,6 @@
 </div>
 
 @code {
-    [Parameter]
-    public Game Game { get; set; }
-
     private GeneralReport[] reports;
 
     protected override void OnParametersSet()

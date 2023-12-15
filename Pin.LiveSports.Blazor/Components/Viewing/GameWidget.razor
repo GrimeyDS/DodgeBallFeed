@@ -1,4 +1,6 @@
-﻿<div class="game-next-match" @onclick="e => OnSelect.InvokeAsync(Game)">
+﻿@inherits Pin.LiveSports.Blazor.Components.Viewing.BaseGameComponent
+
+<div class="game-next-match" @onclick="e => OnSelect.InvokeAsync(Game)">
     <div class="game-body mb-3">
         <ScoreCard IsCompact="true" Game="Game"></ScoreCard>
     </div>
@@ -14,9 +16,6 @@
 </div>
 
 @code {
-    [Parameter]
-    public Game Game { get; set; }
-
     [Parameter]
     public EventCallback<Game> OnSelect { get; set; }
 }

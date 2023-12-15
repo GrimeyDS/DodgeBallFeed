@@ -1,4 +1,6 @@
-﻿<div class="container">
+﻿@inherits Pin.LiveSports.Blazor.Components.Viewing.BaseGameComponent
+
+<div class="container">
     <div class="row">
         <div class="col-lg-12">
 
@@ -27,9 +29,3 @@
         </div>
     </div>
 </div>
-
-@code {
-    [Parameter]
-    public Game Game { get; set; }
-
-}
