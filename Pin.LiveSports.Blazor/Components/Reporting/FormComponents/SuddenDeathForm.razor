@@ -1,4 +1,6 @@
-﻿<EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form">
+﻿@inherits Pin.LiveSports.Blazor.Components.Reporting.FormComponents.BaseFormComponent
+
+<EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <ValidationSummary></ValidationSummary>
 
@@ -23,13 +25,7 @@
 
 @code {
     [Parameter]
-    public EventCallback<GeneralReport> OnSave { get; set; }
-
-    [Parameter]
     public SuddenDeathReport ReportItem { get; set; }
-
-    [Parameter]
-    public Game Game { get; set; }
 
     private void SetHomePlayerId(Guid id)
     {

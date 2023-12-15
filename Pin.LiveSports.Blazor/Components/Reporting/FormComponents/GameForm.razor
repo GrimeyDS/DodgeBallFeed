@@ -1,6 +1,7 @@
-﻿
+﻿@inherits Pin.LiveSports.Blazor.Components.Reporting.FormComponents.BaseFormComponent
+
 <div class="row">
-    <EditForm Model="@Game" OnValidSubmit="e => OnSave.InvokeAsync(Game)" class="form" >
+    <EditForm Model="@Game" OnValidSubmit="e => OnSaveGame.InvokeAsync(Game)" class="form" >
         <DataAnnotationsValidator></DataAnnotationsValidator>
         <ValidationSummary></ValidationSummary>
 
@@ -61,13 +62,7 @@
 </div>
 @code {
     [Parameter]
-    public EventCallback<Game> OnSave { get; set; }
-
-    [Parameter]
-    public Game Game { get; set; }
-
-    [Parameter]
-    public Team[] Teams { get; set; }
+    public EventCallback<Game> OnSaveGame { get; set; }
 
     private void SetHomeTeam(Guid id)
     {
