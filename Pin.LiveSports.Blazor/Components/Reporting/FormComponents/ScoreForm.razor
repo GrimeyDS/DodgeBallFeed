@@ -28,9 +28,15 @@
     private void SetReportScore()
     {
         if (ReportItem.ScoredTeam == Game.HomeTeam)
-            ReportItem.HomeScore = Game.HomeScore++;
+        {
+            Game.HomeScore++;
+            ReportItem.HomeScore = Game.HomeScore;
+        }
         else
-            ReportItem.AwayScore = Game.AwayScore++;
+        {
+            Game.AwayScore++;
+            ReportItem.AwayScore = Game.AwayScore;
+        }
 
         OnSave.InvokeAsync(ReportItem);
     }

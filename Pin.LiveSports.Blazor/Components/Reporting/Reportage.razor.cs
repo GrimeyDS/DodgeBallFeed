@@ -59,6 +59,7 @@ namespace Pin.LiveSports.Blazor.Components.Reporting
         private void SaveReportItem(GeneralReport reportItem)
         {
             RefreshSelects();
+            Game.GameTime = reportItem.Time;
 
             var reportTypeName = reportItem.GetType().Name;
             switch (reportTypeName)
@@ -77,7 +78,7 @@ namespace Pin.LiveSports.Blazor.Components.Reporting
                     Game.SuddenDeathReports.Add((SuddenDeathReport)reportItem);
                     break;
                 case nameof(ScoreReport):
-                    SetGameScore(((ScoreReport)reportItem).ScoredTeam);
+                    //SetGameScore(((ScoreReport)reportItem).ScoredTeam);
                     Game.ScoreReports.Add((ScoreReport)reportItem);
                     break;
                 case nameof(WinReport):
@@ -86,8 +87,6 @@ namespace Pin.LiveSports.Blazor.Components.Reporting
                 default:
                     break;
             }
-
-            Game.GameTime = reportItem.Time;
 
             OnSave.InvokeAsync(Game);
         }
@@ -126,9 +125,13 @@ namespace Pin.LiveSports.Blazor.Components.Reporting
                 ScoredTeam = gameTeams.FirstOrDefault(t => t.Id != team.Id)
             };
 
+            Game.GameTime = report.Time;
             SetGameScore(report.ScoredTeam);
-            Game.ScoreReports.Add(report);
 
+            report.HomeScore = Game.HomeScore;
+            report.AwayScore = Game.AwayScore;
+
+            Game.ScoreReports.Add(report);
             ResetRound();
         }
 
@@ -147,6 +150,7 @@ namespace Pin.LiveSports.Blazor.Components.Reporting
                 Title = title,
                 ReportMessage = message
             };
+            Game.GameTime = report.Time;
             Game.GeneralReports.Add(report);
         }
 
