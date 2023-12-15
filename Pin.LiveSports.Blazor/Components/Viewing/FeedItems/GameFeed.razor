@@ -1,0 +1,46 @@
+﻿@inherits Pin.LiveSports.Blazor.Components.Viewing.BaseGameComponent
+
+<div id="feedContainer">
+    <ul class="timeline">
+        @foreach (var report in reports)
+        {
+            var typeName = report.GetType().Name;
+            switch (typeName)
+            {
+                case nameof(GeneralReport):
+                    <GameGeneralReports ReportItem="report"></GameGeneralReports>
+                    break;
+                case nameof(TeamChangeReport):
+                    <GameTeamChanges ReportItem="(TeamChangeReport)report"></GameTeamChanges>
+                    break;
+                case nameof(FoulReport):
+                    <GameFouls ReportItem="(FoulReport)report"></GameFouls>
+                    break;
+                case nameof(ScoreReport):
+                    <GameScores Game="Game" ReportItem="(ScoreReport)report"></GameScores>
+                    break;
+                case nameof(SuddenDeathReport):
+                    <GameSuddenDeaths Game="Game" ReportItem="(SuddenDeathReport)report"></GameSuddenDeaths>
+                    break;
+                case nameof(WinReport):
+                    <GameWin Game="Game" ReportItem="(WinReport)report"></GameWin>
+                    break;
+                default:
+                    break;
+            }
+        }
+    </ul>
+</div>
+
+@code {
+    private GeneralReport[] reports;
+
+    protected override void OnParametersSet()
+    {
+        // Gebruik van collection expression met spread operator.
+        // Dit zorgt ervoor dat je collecties kan samenhangen en ze 1 dimensioneel maken via de spread operator ..
+        // Voordeel: Minder lijnen code en overzichterlijker.
+        reports = [.. Game.GeneralReports, .. Game.TeamChangeReports, .. Game.SuddenDeathReports, .. Game.ScoreReports, .. Game.FoulReports, .. Game.WinReports];
+        reports = reports.OrderByDescending(x => x.Time).ToArray();
+    }
+}

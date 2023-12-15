@@ -1,0 +1,16 @@
+﻿<li class="event" data-date="@(ReportItem.Time)'">
+    <h3>@ReportItem.Title</h3>
+
+    <div id="foulImgContainer">
+        <img id="foul" src="../images/foul.png" alt="foul" />
+    </div>
+
+    <div id="foulBody">
+        <h2>@ReportItem.Player.FirstName @ReportItem.Player.LastName</h2>
+        @ReportItem.ReportMessage
+    </div>
+</li>
+@code {
+    [Parameter]
+    public FoulReport ReportItem { get; set; }
+}

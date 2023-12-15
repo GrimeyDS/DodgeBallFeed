@@ -1,0 +1,53 @@
+﻿#allGames {
+    background-color: #1A1E25;
+    margin-top: 10px;
+    height: fit-content;
+}
+
+#head {
+    width: 10px;
+    display: inline-block;
+    background-color: #ee1e46;
+    height: 25px;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+}
+
+h3 {
+    display: inline-block;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+#news {
+    background-color: #1A1E25;
+    margin-top: 10px;
+    height: fit-content;
+    padding-left: 10px;
+
+}
+
+img {
+    width: 99%;
+    height: 100%;
+}
+
+h1 {
+    font-size: 25px;
+    margin-bottom: 0px;
+    background-color: #ee1e46;
+    color: white;
+    padding: 10px;
+}
+
+p {
+    color: white;
+    padding: 10px;
+}
+
+h2 {
+    color: white;
+    margin-top: 10px;
+    margin-left: 10px;
+}

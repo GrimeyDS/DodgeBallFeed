@@ -1,0 +1,82 @@
+﻿<Select Data="reportTypes" OnSelect="ChangeReportType" @ref="_selectReport"></Select>
+
+@if (selectedReportType == "Game")
+{
+    <GameForm Teams="Teams" Game="Game" OnSaveGame="SaveGame"></GameForm>
+}
+else if (selectedReportType == "Feed")
+{
+    <Select Data="subReportTypes" OnSelect="ChangeSubReportType" @ref="_selectSubReport"></Select>
+
+    <div class="row" id="selection">
+        <div>
+            <select @onchange="e => ChangeCurrentGame(e)" class="form-select" aria-label="Default select example">
+                <option value="" disabled selected>Select a game</option>
+                @foreach (var game in Games)
+                {
+                    <option value="@game.Id">@game.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    @if (selectedSubReportType == "none")
+    {
+        <div class="row">
+            <div class="col">
+                <h3>Please select a type of feed</h3>
+            </div>
+        </div>
+    }
+    else
+    {
+        if (selectedGameId == Guid.Empty || Game is null)
+        {
+            <div class="row">
+                <div class="col">
+                    <h3>Please select a game</h3>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="form-control col">
+                    @switch (selectedSubReportType)
+                    {
+                        case "General":
+                            reportItem = new GeneralReport(Game.GameTime);
+                            <GeneralForm ReportItem="reportItem" OnSave="SaveReportItem"></GeneralForm>
+                            break;
+                        case "Foul":
+                            reportItem = new FoulReport(Game.GameTime);
+                            <FoulForm Teams="gameTeams" ReportItem="(FoulReport)reportItem" OnSave="SaveReportItem"></FoulForm>
+                            break;
+                        case "Team Change":
+                            reportItem = new TeamChangeReport(Game.GameTime);
+                            <TeamChangeForm Game="Game" Teams="gameTeams" ReportItem="(TeamChangeReport)reportItem" OnSave="SaveReportItem"></TeamChangeForm>
+                            break;
+                        case "Sudden Death":
+                            reportItem = new SuddenDeathReport(Game.GameTime);
+                            <SuddenDeathForm Game="Game" ReportItem="(SuddenDeathReport)reportItem" OnSave="SaveReportItem"></SuddenDeathForm>
+                            break;
+                        case "Score":
+                            reportItem = new ScoreReport(Game.GameTime);
+                            <ScoreForm Game="Game" Teams="gameTeams" ReportItem="(ScoreReport)reportItem" OnSave="SaveReportItem"></ScoreForm>
+                            break;
+                        case "Win":
+                            reportItem = new WinReport(Game.GameTime);
+                            <WinForm  Teams="gameTeams" ReportItem="(WinReport)reportItem" OnSave="SaveReportItem"></WinForm>
+                            break;
+                        default:
+                            break;
+                    }
+                </div>
+
+                <div class="col-4">
+                    <GameWidget Game="Game"></GameWidget>
+                </div>
+            </div>
+        }
+    }
+}

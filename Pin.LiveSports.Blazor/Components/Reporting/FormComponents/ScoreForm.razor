@@ -1,0 +1,43 @@
+﻿@inherits Pin.LiveSports.Blazor.Components.Reporting.FormComponents.BaseFormComponent
+
+<EditForm Model="@ReportItem" OnValidSubmit="SetReportScore" class="form">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <BaseForm ReportItem="ReportItem"></BaseForm>
+
+    <div class="row">
+        <div class="col-3">
+                <label class="col-form-label">Scored team</label>
+                <TeamSelect Teams="Teams" OnSelect="SetScoredTeam"></TeamSelect>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public ScoreReport ReportItem { get; set; }
+
+    private void SetScoredTeam(Guid id)
+    {
+        ReportItem.ScoredTeam = Teams.FirstOrDefault(t => t.Id == id);
+    }
+
+    private void SetReportScore()
+    {
+        if (ReportItem.ScoredTeam == Game.HomeTeam)
+        {
+            Game.HomeScore++;
+            ReportItem.HomeScore = Game.HomeScore;
+        }
+        else
+        {
+            Game.AwayScore++;
+            ReportItem.AwayScore = Game.AwayScore;
+        }
+
+        OnSave.InvokeAsync(ReportItem);
+    }
+}

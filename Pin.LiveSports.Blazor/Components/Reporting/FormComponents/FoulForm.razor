@@ -1,0 +1,38 @@
+﻿@inherits Pin.LiveSports.Blazor.Components.Reporting.FormComponents.BaseFormComponent
+
+<EditForm Model="@ReportItem" OnValidSubmit="e => OnSave.InvokeAsync(ReportItem)" class="form" >
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <BaseForm ReportItem="ReportItem"></BaseForm>
+
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label" for="player">Foul player</label>
+            @if (players != null)
+            {
+                <PlayerSelect Players="players" OnSelect="SetPlayer"></PlayerSelect>
+            }
+                    
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public FoulReport ReportItem { get; set; }
+
+    private Player[] players;
+
+    protected override void OnInitialized()
+    {
+        players = Teams.SelectMany(t => t.Players).ToArray();
+    }
+
+    private void SetPlayer(Guid playerId)
+    {
+        ReportItem.Player = players.FirstOrDefault(p => p.Id == playerId);
+    }
+}

@@ -1,0 +1,23 @@
+﻿<li class="event" data-date="@(ReportItem.Time)'">
+    <h3>@ReportItem.Title</h3>
+    <div>
+        @ReportItem.ReportMessage
+        <div id="playerChangeContainer">
+            <img id="arrow" src="@url" alt="player-change" />@ReportItem.Player.FirstName @ReportItem.Player.LastName - @ReportItem.Team.Name
+        </div>
+    </div>
+</li>
+@code {
+    [Parameter]
+    public TeamChangeReport ReportItem { get; set; }
+
+    private string url;
+
+    protected override void OnParametersSet()
+    {
+        if (ReportItem.IsOut)
+            url = "../images/redarrow.png";
+        else
+            url = "../images/greenarrow.png";
+    }
+}

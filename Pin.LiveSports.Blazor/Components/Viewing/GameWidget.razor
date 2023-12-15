@@ -1,0 +1,21 @@
+﻿@inherits Pin.LiveSports.Blazor.Components.Viewing.BaseGameComponent
+
+<div class="game-next-match" @onclick="e => OnSelect.InvokeAsync(Game)">
+    <div class="game-body mb-3">
+        <ScoreCard IsCompact="true" Game="Game"></ScoreCard>
+    </div>
+
+    <div class="text-center game-vs-contents mb-4">
+        <h4>@Game.Name</h4>
+        <p class="mb-5">
+            <span class="d-block">@Game.GameDate.ToShortDateString()</span>
+            <span class="d-block">@(Game.GameTime)'</span>
+            <strong class="text-info">@Game.Location</strong>
+        </p>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<Game> OnSelect { get; set; }
+}

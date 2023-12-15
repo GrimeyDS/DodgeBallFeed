@@ -1,0 +1,39 @@
+﻿<ul class="list-unstyled">
+
+    @foreach (var player in Players)
+    {
+            @if (player.IsOut)
+            {
+            
+                <li @onclick="() => ShowPlayerDetails(player)"><s>@player.FirstName @player.LastName</s></li>
+            }
+            else
+            {
+                <li @onclick="() => ShowPlayerDetails(player)">@player.FirstName @player.LastName</li>
+            }
+    }
+</ul>
+
+@if (isPlayerInfoVisible)
+{
+    <PlayerModal Player="selectedPlayer" IsVisible="isPlayerInfoVisible" OnSave="HidePlayerInfo"></PlayerModal>
+}
+
+@code {
+    [Parameter]
+    public Player[] Players { get; set; }
+
+    private bool isPlayerInfoVisible = false;
+    private Player selectedPlayer;
+
+    private void ShowPlayerDetails(Player player)
+    {
+        selectedPlayer = player;
+        isPlayerInfoVisible = true;
+    }
+
+    private void HidePlayerInfo()
+    {
+        isPlayerInfoVisible = false;
+    }
+}

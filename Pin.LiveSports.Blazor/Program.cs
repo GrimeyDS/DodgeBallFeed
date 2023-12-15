@@ -1,6 +1,5 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Pin.LiveSports.Blazor.Data;
+using Pin.LiveSports.Blazor.Hubs;
+using Pin.LiveSports.Core.Services;
 
 namespace Pin.LiveSports.Blazor
 {
@@ -13,8 +12,8 @@ namespace Pin.LiveSports.Blazor
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-            builder.Services.AddSingleton<WeatherForecastService>();
-
+            builder.Services.AddSignalR();
+            builder.Services.AddTransient<ITeamService, TeamService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,7 +29,7 @@ namespace Pin.LiveSports.Blazor
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.MapHub<ReportHub>("/reportHub");
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
 

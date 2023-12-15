@@ -1,0 +1,36 @@
+﻿@inherits Pin.LiveSports.Blazor.Components.Reporting.FormComponents.BaseFormComponent
+
+<EditForm Model="@ReportItem" OnValidSubmit="SetGamePlayer" class="form">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <BaseForm ReportItem="ReportItem"></BaseForm>
+
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label">Team</label>
+            <TeamSelect Teams="Teams" OnSelect="SetTeam"></TeamSelect>
+        </div>
+        @if(ReportItem.Team is not null)
+        {
+            <div class="col-3">
+                <label class="col-form-label">Player</label>
+                <PlayerSelect Players="teamPlayers"  OnSelect="SetPlayer"></PlayerSelect>
+            </div>
+        }
+    </div>
+
+    @if (ReportItem.Player is not null)
+    {
+        <div class="row">
+            <div class="form-check form-switch" id="teamToggle">
+                <label class="form-check-label" for="isOut">Out?</label>
+                <InputCheckbox class="form-check-input" id="isOut" @bind-Value="ReportItem.Player.IsOut"></InputCheckbox>
+                <ValidationMessage For="(() => ReportItem.Player.IsOut)" />
+            </div>
+        </div>
+    }
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>

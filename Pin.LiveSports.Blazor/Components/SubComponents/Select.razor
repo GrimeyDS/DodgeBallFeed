@@ -1,0 +1,27 @@
+﻿
+<div class="row" id="selection">
+    <div>
+        <select @bind="selectedItem" @onmouseup="e => OnSelect.InvokeAsync(selectedItem)" class="form-select" aria-label="Default select example">
+            <option value="none" disabled selected>none</option>
+            @foreach(var item in Data)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string[] Data { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnSelect { get; set; }
+
+    private string selectedItem;
+
+    public void Refresh()
+    {
+        selectedItem = "none";
+    }
+}

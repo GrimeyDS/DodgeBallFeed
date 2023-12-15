@@ -1,0 +1,42 @@
+﻿@inherits Pin.LiveSports.Blazor.Components.Viewing.BaseGameComponent
+
+<div class="game-vs">
+    <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
+        <div class="team-1 text-center">
+            <img src="@Game.HomeTeam.LogoUrl" alt="Image">
+            <h3>@Game.HomeTeam.Name</h3>
+            <h4>@homeScore</h4>
+
+            <PlayerListCompact Team="Game.HomeTeam" IsCompact="IsCompact" ></PlayerListCompact>
+
+        </div>
+        <div>
+            <span class="vs"><span>VS</span></span>
+        </div>
+        <div class="team-2 text-center">
+            <img src="@Game.AwayTeam.LogoUrl" alt="Image">
+            <h3>@Game.AwayTeam.Name</h3>
+            <h4>@awayScore</h4>
+
+            <PlayerListCompact Team="Game.AwayTeam" IsCompact="IsCompact"></PlayerListCompact>
+
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public bool IsCompact { get; set; } = false;
+
+    [Parameter]
+    public ScoreReport ReportItem { get; set; }
+
+    private int homeScore;
+    private int awayScore;
+
+    protected override void OnParametersSet()
+    {
+        homeScore = ReportItem is not null ? ReportItem.HomeScore : Game.HomeScore;
+        awayScore = ReportItem is not null ? ReportItem.AwayScore : Game.AwayScore;
+    }
+}

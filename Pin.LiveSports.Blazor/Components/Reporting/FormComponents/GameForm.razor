@@ -1,0 +1,77 @@
+﻿@inherits Pin.LiveSports.Blazor.Components.Reporting.FormComponents.BaseFormComponent
+
+<div class="row">
+    <EditForm Model="@Game" OnValidSubmit="e => OnSaveGame.InvokeAsync(Game)" class="form" >
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <div class="row">
+            <div class="col">
+                <label class="col-form-label" for="gameName">Game Name:</label>
+                <InputText id="name" class="form-control" @bind-Value="Game.Name"></InputText>
+                <ValidationMessage For="@(() => Game.Name)" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <label class="col-form-label" for="date">Game date</label>
+                <InputDate Type="InputDateType.Date" id="date" class="form-control" @bind-Value="Game.GameDate"></InputDate>
+                <ValidationMessage For="@(() => Game.GameDate)" />
+            </div>
+            <div class="col-3">
+                <label class="col-form-label" for="time">Game time</label>
+                <InputDate Type="InputDateType.Time" class="form-control" @bind-Value="Game.GameTime"></InputDate>
+                <ValidationMessage For="@(() => Game.GameTime)" />
+            </div>
+            <div class="col-6">
+                <label class="col-form-label" for="location">Location</label>
+                <InputText id="time" class="form-control" @bind-Value="Game.Location"></InputText>
+                <ValidationMessage For="@(() => Game.Location)" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <label class="col-form-label">Home team</label>
+                <TeamSelect OnSelect="SetHomeTeam" Teams="Teams"></TeamSelect>
+            </div>
+
+            <div class="col-2">
+                <label class="col-form-label" for="homeScore">Score</label>
+                <InputNumber id="homeScore" class="form-control" @bind-Value="Game.HomeScore"></InputNumber>
+                <ValidationMessage For="@(() => Game.HomeScore)" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <label class="col-form-label">Away team</label>
+                <TeamSelect OnSelect="SetAwayTeam" Teams="Teams"></TeamSelect>
+            </div>
+
+            <div class="col-2">
+                <label class="col-form-label" for="awayScore">Score</label>
+                <InputNumber id="awayScore" class="form-control" @bind-Value="Game.AwayScore"></InputNumber>
+                <ValidationMessage For="@(() => Game.AwayScore)" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+</div>
+@code {
+    [Parameter]
+    public EventCallback<Game> OnSaveGame { get; set; }
+
+    private void SetHomeTeam(Guid id)
+    {
+        Game.HomeTeam = Teams.SingleOrDefault(t => t.Id == id);
+    }
+
+    private void SetAwayTeam(Guid id)
+    {
+        Game.AwayTeam = Teams.SingleOrDefault(t => t.Id == id);
+    }
+}
+s
