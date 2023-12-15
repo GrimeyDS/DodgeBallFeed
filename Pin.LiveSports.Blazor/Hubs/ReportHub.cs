@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using Pin.LiveSports.Core.Entities.Games;
 
 namespace Pin.LiveSports.Blazor.Hubs
 {

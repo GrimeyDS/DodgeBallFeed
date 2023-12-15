@@ -19,7 +19,8 @@ namespace Pin.LiveSports.Core.Entities.Reports
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var results = new List<ValidationResult>();
+            // Gebruik van collection expressions om te instantieren.
+            List<ValidationResult> results = [];
             if (Time <= currentGameTime)
                 results.Add(new ValidationResult("Time cannot be less than the current game time."));
 

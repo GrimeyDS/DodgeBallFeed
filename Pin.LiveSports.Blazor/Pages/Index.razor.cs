@@ -12,6 +12,7 @@ namespace Pin.LiveSports.Blazor.Pages
 
         private bool isReporter = false;
         private ReportClient reportClient;
+        // Gebruik van collection expressions om te instantieren.
         private readonly List<Game> games = [];
         private Team[] teams;
 

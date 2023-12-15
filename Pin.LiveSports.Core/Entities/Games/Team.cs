@@ -2,7 +2,8 @@
 {
     public class Team : BaseEntity
     {
-        public ICollection<Player> Players { get; set; } = new List<Player>();
+        // Gebruik van collection expressions om te instantieren.
+        public ICollection<Player> Players { get; set; } = [];
         public string LogoUrl { get; set; }
     }
 }
