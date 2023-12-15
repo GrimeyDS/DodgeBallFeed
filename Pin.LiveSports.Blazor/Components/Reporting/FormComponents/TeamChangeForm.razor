@@ -23,7 +23,7 @@
     @if (ReportItem.Player is not null)
     {
         <div class="row">
-            <div class="form-check form-switch" id="selection">
+            <div class="form-check form-switch" id="teamToggle">
                 <label class="form-check-label" for="isOut">Out?</label>
                 <InputCheckbox class="form-check-input" id="isOut" @bind-Value="ReportItem.Player.IsOut"></InputCheckbox>
                 <ValidationMessage For="(() => ReportItem.Player.IsOut)" />
