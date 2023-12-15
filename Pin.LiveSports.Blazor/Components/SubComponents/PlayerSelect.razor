@@ -1,6 +1,6 @@
-﻿
+﻿@inherits Pin.LiveSports.Blazor.Components.SubComponents.BaseSelectComponent
 
-    <InputSelect class="form-select" id="player" TValue="Guid" @bind-Value="playerId" @onmouseup="e => OnSelect.InvokeAsync(playerId)">
+    <InputSelect class="form-select" id="player" TValue="Guid" @bind-Value="id" @onmouseup="e => OnSelect.InvokeAsync(id)">
         <option disabled selected>Select a Player</option>
         @foreach (var player in Players)
         {
@@ -10,10 +10,5 @@
 
 @code {
     [Parameter]
-    public EventCallback<Guid> OnSelect { get; set; }
-
-    [Parameter]
     public Player[] Players { get; set; }
-
-    public Guid playerId;
 }

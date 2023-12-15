@@ -1,7 +1,7 @@
 ﻿
 <div class="row" id="selection">
     <div>
-        <select @bind="selectedItem" @onmouseup="e => SendSelectedItem()" class="form-select" aria-label="Default select example">
+        <select @bind="selectedItem" @onmouseup="e => OnSelect.InvokeAsync(selectedItem)" class="form-select" aria-label="Default select example">
             <option value="none" disabled selected>none</option>
             @foreach(var item in Data)
             {
@@ -19,11 +19,6 @@
     public EventCallback<string> OnSelect { get; set; }
 
     private string selectedItem;
-
-    private void SendSelectedItem()
-    {
-        OnSelect.InvokeAsync(selectedItem);
-    }
 
     public void Refresh()
     {
