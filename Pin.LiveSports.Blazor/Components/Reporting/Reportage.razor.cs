@@ -83,8 +83,8 @@ namespace Pin.LiveSports.Blazor.Components.Reporting
                     Game.SuddenDeathReports.Add((SuddenDeathReport)reportItem);
                     break;
                 case nameof(ScoreReport):
-                    //SetGameScore(((ScoreReport)reportItem).ScoredTeam);
                     Game.ScoreReports.Add((ScoreReport)reportItem);
+                    ResetRound();
                     break;
                 case nameof(WinReport):
                     Game.WinReports.Add((WinReport)reportItem);
