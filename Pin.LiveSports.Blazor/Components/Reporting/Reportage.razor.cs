@@ -38,7 +38,12 @@ namespace Pin.LiveSports.Blazor.Components.Reporting
         {
             selectedReportType = selectedItem;
             if (selectedReportType == "Game")
+            {
                 Game = new Game();
+                selectedGameId = Guid.Empty;
+                selectedSubReportType = "none";
+            }
+                
         }
 
         private void ChangeSubReportType(string selectedItem)
